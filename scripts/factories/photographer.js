@@ -1,41 +1,50 @@
  function photographerFactory(data) {
-    const { name,city,country,tagline,price,portrait } = data;
+    const { name, id, city, country, tagline, price, portrait } = data;  // récupération des données via "data"
     // console.log({name,city,country,portrait, tagline, price});
 
-    const picture = `assets/Photographers_ID_Photos/${portrait}`;
+    const picture = `assets/Photographers_ID_Photos/${portrait}`; // ajout dans la constante "picture" le lien vers le dossier des photos
 
-    function getUserCardDOM() {
-        const article = document.createElement( 'article' );
-        const div1 = document.createElement( 'div');
-        const div2 = document.createElement( 'div');
+    function getUserCardDOM() { // Création des articles du DOM pour chaque photographeurs
+        const article = document.createElement( 'article' ); // Création de la balise article
 
-        const img = document.createElement( 'img' );
+        const sectionImageArticle = document.createElement( 'section' ); // création de la section cliquable
+        sectionImageArticle.className = "photographer_pictureName";
+
+        const sectionImageArticleLink = document.createElement( 'a' );
+        sectionImageArticleLink.appendChild(sectionImageArticle);
+        sectionImageArticleLink.setAttribute("href", "photographer.html");
+        sectionImageArticleLink.setAttribute("id", id);
+
+        const footerImageArticle = document.createElement( 'footer' ); // création ddu footer pour le contenu
+
+        const img = document.createElement( 'img' ); // création de la balise photo
         img.setAttribute("src", picture);
-        div1.appendChild(img);
+        img.setAttribute("alt", "Photo de " + name);
+        sectionImageArticle.appendChild(img); // ajout de l'image dans la div image
 
-        const h2 = document.createElement( 'h2' );
+        const h2 = document.createElement( 'h2' ); // création du titre h2 pour les noms des photographes
         h2.textContent = name;
-        div1.appendChild(h2);
+        sectionImageArticle.appendChild(h2);
 
-        const pCountry = document.createElement( 'p' );
+        const pCountry = document.createElement( 'h3' ); // Création des titre h3 pour les villes et pays de chaque photographe
         pCountry.className = "photographer_country";
         pCountry.textContent = city + ", " + country;
-        div2.appendChild(pCountry);
+        footerImageArticle.appendChild(pCountry);
 
-        const taglines = document.createElement( 'p' );
+        const taglines = document.createElement( 'p' ); // Création d'un paragraphe "p" pour leur slogan
         taglines.className = "photographer_tagline";
         taglines.textContent = tagline;
-        div2.appendChild(taglines);
+        footerImageArticle.appendChild(taglines);
 
-        const prices = document.createElement( 'p' );
+        const prices = document.createElement( 'p' ); // Création d'un paragraphe pour leur prix journalier
         prices.className = "photographer_price";
         prices.textContent = price + "€/jour";
-        div2.appendChild(prices);
+        footerImageArticle.appendChild(prices);
 
-        article.appendChild(div1);
-        article.appendChild(div2);
+        article.appendChild(sectionImageArticleLink); // Ajout de la section dans l'article
+        article.appendChild(footerImageArticle); // Ajout du footer de l'article dans l'article
         return (article);
     }
-    
-    return { name, picture, getUserCardDOM}
+
+    return { name, getUserCardDOM}
 }
