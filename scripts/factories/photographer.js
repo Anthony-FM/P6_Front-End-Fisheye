@@ -10,16 +10,16 @@
         const sectionImageArticle = document.createElement( 'section' ); // création de la section cliquable
         sectionImageArticle.className = "photographer_pictureName";
 
-        const sectionImageArticleLink = document.createElement( 'a' );
+        const sectionImageArticleLink = document.createElement( 'a' ); // Création des liens
         sectionImageArticleLink.appendChild(sectionImageArticle);
-        sectionImageArticleLink.setAttribute("href", "photographer.html");
         sectionImageArticleLink.setAttribute("id", id);
+        sectionImageArticleLink.setAttribute("href", `photographer.html?${id}/${name}`);
 
         const footerImageArticle = document.createElement( 'footer' ); // création ddu footer pour le contenu
 
         const img = document.createElement( 'img' ); // création de la balise photo
         img.setAttribute("src", picture);
-        img.setAttribute("alt", "Photo de " + name);
+        img.setAttribute("alt", "Profil de " + name);
         sectionImageArticle.appendChild(img); // ajout de l'image dans la div image
 
         const h2 = document.createElement( 'h2' ); // création du titre h2 pour les noms des photographes
@@ -46,5 +46,7 @@
         return (article);
     }
 
-    return { name, getUserCardDOM}
+    return {getUserCardDOM}
 }
+
+
