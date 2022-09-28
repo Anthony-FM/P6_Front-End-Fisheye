@@ -14,16 +14,16 @@ async function displayData(photographers) {
 
     photographers.forEach((photographer) => { // pour chaque 'photographe'
         const photographerModel = photographerFactory(photographer);
-        // console.log(photographerModel);
+        console.log(photographerModel);
         const userCardDOM = photographerModel.getUserCardDOM();
-        // console.log(userCardDOM);
+        console.log(userCardDOM);
         photographersSection.appendChild(userCardDOM);
     });
 };
 
 async function init() {
     // Récupère les datas des photographes
-    const { photographers } = await getPhotographers();
+    const {photographers} = await getPhotographers();
     displayData(photographers);
 };
 
