@@ -6,6 +6,44 @@
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    /* display:flex;
+    flex-direction: row;
+    justify-content: space-around; */
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: auto;
+}
+
+.photograph-header article {
+    padding-left: 50px;
+    margin: auto;
+}
+
+.photographerPage_name {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    margin: 0;
+    color: #D3573C;
+}
+
+.photographerPage_country {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    margin: 16px 0 0;
+    color: #901C1C;
+}
+
+.photographerPage_tagline {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    margin: 19px 0 0;
+    color: #525252;
 }
 
 .contact_button {
@@ -19,6 +57,7 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    margin: auto;
 }
 
 .modal {
@@ -73,4 +112,11 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+
+.photograph-header img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
 }
