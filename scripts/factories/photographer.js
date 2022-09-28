@@ -79,6 +79,7 @@
         userPicture.appendChild(imgUser)
 
         return userPicture;
+        
     }
 
     return {name, id, city, country, tagline, price, portrait, getUserCardDOM, getUserNameDOM, getUserPictureDOM}
