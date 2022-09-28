@@ -2,15 +2,16 @@
 <html>
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/photographer.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Fisheye - photographe </title>
   </head>
   <body>
-    <header>
+    <header role="banner" aria-label="banner">
       <a href="index.html">
-        <img src="assets/images/logo.png" class="logo" />
+        <img src="assets/images/logo.png" class="logo" role="img" aria-label="Fisheye Page d'Accueil" alt="Fisheye Page d'Accueil" dir="ltr" />
       </a>
     </header>
     <main id="main">
@@ -33,7 +34,12 @@
 				</form>
 			</div>
 		</div>
+    <!-- Factories -->
+    <script src="/scripts/factories/photographer.js"></script>
+    <!-- Pages -->
     <script src="/scripts/pages/photographer.js"></script>
+    <!-- Utils  -->
     <script src="/scripts/utils/contactForm.js"></script>
+    
   </body>
 </html>
