@@ -5,11 +5,12 @@
     <link href="css/photographer.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
+    <script src="https://kit.fontawesome.com/d0ee6e80bb.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Fisheye - photographe </title>
   </head>
   <body>
-    <header role="banner" aria-label="banner">
+    <header role="banner" aria-label="banner" id="header">
       <a href="index.html">
         <img src="assets/images/logo.png" class="logo" role="img" aria-label="Fisheye Page d'Accueil" alt="Fisheye Page d'Accueil" dir="ltr" />
       </a>
@@ -18,17 +19,60 @@
       <div class="photograph-header">
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
+      <div class="sortElement">
+        
+        <h3>Trier par</h3>
+        <div class="btn-container">
+
+          <div class="sort-container" id="sortPopularite" style="border-bottom: none;">
+            <label for="Popularite" class="hidden-label">Popularité</label>
+            <input class="btn-sort" type="button" id="Popularite" value="Popularite" >
+            <i class="fa-solid fa-chevron-down" style="display: block;"></i>
+          </div>
+
+          <div class="sort-container hidden-sort" id="sortDate">
+            <label for="Date" class="hidden-label">Date</label>
+            <input class="btn-sort" type="button" id="Date" value="Date" >
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+
+          <div class="sort-container hidden-sort" id="sortTitle">
+            <label for="Titre" class="hidden-label">Titre</label>
+            <input class="btn-sort" type="button" id="Title" value="Titre" >
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>  
+
+        </div>
+        
+      </div>
+
+      <section id="user-pictures" class="user-pictures">
+
+      </section>
     </main>
-    <div id="contact_modal">
+    <div id="contact_modal" class="contact-modal">
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
           <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <h3 id="idName"></h3>
         </header>
 				<form>
 					<div>
-						<label>Prénom</label>
-						<input />
+						<label for="firstname">Prénom</label>
+						<input type="text" id="firstname" />
+					</div>
+					<div>
+						<label for="lastname">Nom</label>
+						<input type="text" id="lastname" />
+					</div>
+					<div>
+						<label for="email">email</label>
+						<input type="email" id="email" />
+					</div>
+					<div>
+						<label for="messages">Votre message</label>
+						<textarea type="text" id="messages"></textarea>
 					</div>
           <button class="contact_button">Envoyer</button>
 				</form>
@@ -40,6 +84,7 @@
     <script src="./scripts/pages/photographer.js"></script>
     <!-- Utils  -->
     <script src="./scripts/utils/contactForm.js"></script>
+    <script src="./scripts/utils/sortby.js"></script>
     
   </body>
 </html>
