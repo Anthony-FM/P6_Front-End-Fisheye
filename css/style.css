@@ -95,5 +95,81 @@ a{
     text-align: center;
     color: #757575;
     margin: 0px auto;
+}
 
+.btn-container {
+    width: 170px;
+    position: absolute;
+    right: 0;
+    background: #911C1C;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    z-index: 99;
+}
+
+.btn-container :nth-child(5) {
+    border-bottom: none;
+}
+
+
+.sort-container {
+    width: 80%;
+    border-bottom: #FFFFFF 1px solid;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: flex-start;
+}
+
+.hidden-label {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.btn-sort {
+    
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    color: #FFFFFF;
+    border: none;   
+    background-color: transparent;
+    height: 50px;
+    /* display: flex;
+    justify-content: center;
+    align-content: center; */
+    cursor: pointer;
+    position: relative;
+
+}
+
+.sort-container i {
+    position: absolute;
+    right: 0;
+    color: #FFF;
+    display: none;
+}
+
+
+.sortElement {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 269px;
+    margin: 20px 100px;
+    position: relative;
+}
+
+.hidden-sort {
+    display: none;
 }
