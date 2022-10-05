@@ -42,7 +42,7 @@ async function CreateId(data) {
 async function CreatePicture(data) {    
     
     const photographerPicture = document.getElementById('user-pictures'); 
-    let urlName = `../assets/${data.name}/`;
+    let urlName = `./assets/${data.name}/`;
 
     data.media.forEach((media) => {
         let medias = { ...media, urlName}
