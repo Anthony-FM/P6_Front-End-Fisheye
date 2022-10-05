@@ -2,13 +2,13 @@
 
 async function getUrlID() {
 
-        let params = (new URL(document.location)).searchParams;
-        console.log(params);
-        let id = parseInt(params.get('id'));
-        console.log(id);
+    let params = (new URL(document.location)).searchParams;
+    console.log(params);
+    let id = parseInt(params.get('id'));
+    console.log(id);
 
-        return id;
-    }
+    return id;
+}
 
 async function getPhotographer(id) {
     // Récupérations des données dans le json
@@ -39,11 +39,35 @@ async function CreateId(data) {
     
 }
 
+async function CreatePicture(data) {    
+    
+    const photographerPicture = document.getElementById('user-pictures'); 
+    let urlName = `../assets/${data.name}/`;
+
+    data.media.forEach((media) => {
+        let medias = { ...media, urlName}
+        const pictureDOM = mediaFactory(medias);
+        const pictureArticle = pictureDOM.getUserMediasDOM();
+        photographerPicture.appendChild(pictureArticle);
+    })
+}
+
+async function CreateAllLikes(data){
+    const photographerPicture = document.getElementById('user-pictures');
+    const datalikesAndPrices = mediaFactory(data);
+    console.log(datalikesAndPrices)
+    const likesAndPrices = datalikesAndPrices.getLikesNumbers();
+    console.log(likesAndPrices)
+    photographerPicture.appendChild(likesAndPrices);  
+}
+
 async function init() {
     const id = await getUrlID()
     // Récupère les datas du photographe
     const thePhotographer = await getPhotographer(id);
-    CreateId(thePhotographer);
+    await  CreateId(thePhotographer);
+    await CreatePicture(thePhotographer);
+    await CreateAllLikes(thePhotographer);
 };
 
 init();
