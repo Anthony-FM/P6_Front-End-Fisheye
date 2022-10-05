@@ -1,5 +1,5 @@
  function photographerFactory(data) {
-    const { name, id, city, country, tagline, price, portrait } = data;  // récupération des données via "data"
+    const { name, id, city, country, tagline, price, portrait, ...media} = data;  // récupération des données via "data"
     // console.log({name,city,country,portrait, tagline, price});
 
     const picture = `assets/Photographers_ID_Photos/${portrait}`; // ajout dans la constante "picture" le lien vers le dossier des photos
@@ -79,10 +79,110 @@
         userPicture.appendChild(imgUser)
 
         return userPicture;
+
+    }    
+
+    return {name, id, city, country, tagline, price, portrait, media, getUserCardDOM, getUserNameDOM, getUserPictureDOM}
+}
+
+function mediaFactory(data){
+    const {id, photographerId, title, image, likes, date, price, urlName, video} = data;
+    
+
+    function getUserMediasDOM() {
+        let articlePicture = document.createElement( 'article' );
+        articlePicture.className = "article-pictures";
+
+        let header = document.createElement( 'header' );
+        header.className = "picture-container";        
+
+        let imgPictures = document.createElement( 'img' );
+        imgPictures.setAttribute("src", urlName + image);
+        imgPictures.setAttribute("alt", "Picture of " + title );
+
+        let videoPictures = document.createElement( 'video' );
+        videoPictures.setAttribute("controls","");
+        let sourceVideo = document.createElement( 'source' );
+        sourceVideo.setAttribute("src", urlName + video);
+        sourceVideo.setAttribute("alt", "Video of" + title );
+        sourceVideo.setAttribute("type", "video/mp4");
+        videoPictures.appendChild(sourceVideo);
+
+        if (image) {
+            header.appendChild(imgPictures);
+        } else {
+            header.appendChild(videoPictures);
+        }
         
+
+        let footerPicture = document.createElement( 'footer' );
+        footerPicture.className = "footer-pictures";
+
+        let titlePictures = document.createElement( 'h2' );
+        titlePictures.className = "title-pictures";
+        titlePictures.textContent = title;
+        footerPicture.appendChild(titlePictures)
+
+        let heartNumberContainer = document.createElement( 'div' );
+        heartNumberContainer.className = "heart-container";
+
+        let heartNumber = document.createElement( 'p' );
+        heartNumber.className = "heart-number";
+        heartNumber.textContent = likes;
+
+        let heart = document.createElement( 'i' );
+        heart.className = "fa-regular fa-heart";
+        heart.addEventListener('click', () => {
+            if(heart.classList.contains = "fa-regular"){
+                heart.classList.replace("fa-regular", "fa-solid");
+            } else {
+                heart.classList.replace("fa-solid", "fa-regular");
+            }
+                
+        })
+
+        heart.setAttribute('aria-hidden','false');
+        heart.setAttribute("title", "Nombre de like pour cette photo. cliquez pour ajouter un like")
+
+        heartNumberContainer.appendChild(heartNumber);
+        heartNumberContainer.appendChild(heart);
+
+        footerPicture.appendChild(heartNumberContainer);
+
+        articlePicture.appendChild(header);
+        articlePicture.appendChild(footerPicture);
+        return articlePicture;
+
     }
 
-    return {name, id, city, country, tagline, price, portrait, getUserCardDOM, getUserNameDOM, getUserPictureDOM}
+    function getLikesNumbers() {
+        let countContainer = document.createElement( 'aside');
+        countContainer.className = "count-container";
+
+        let totalHeartNumber = document.createElement( 'p' );
+        totalHeartNumber.className = "hearts-number";
+        
+        let totals = 0;        
+        for(let [key,value] of Object.entries(data.media))
+        {
+            totals = totals + value.likes;
+        }
+        
+        totalHeartNumber.innerHTML = `${totals} <i class="fa-solid fa-heart" aria-hidden="true" title="Nombre de like total de toutes les photos"></i><br/>
+        <span class="screenreader-text">Nombre de like pour cette photo</span>`;
+
+        
+
+        let priceByDay = document.createElement( 'p' );
+        priceByDay.textContent = `${price}€ / jour`;
+
+        countContainer.appendChild(totalHeartNumber);
+        countContainer.appendChild(priceByDay);
+
+        return countContainer;
+    }
+
+    return {id, photographerId, title, image, likes, date, price,getUserMediasDOM, getLikesNumbers}
 }
 
 
