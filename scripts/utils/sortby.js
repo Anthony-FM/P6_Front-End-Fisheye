@@ -147,6 +147,7 @@ function selectTitleSort(event) {
     }  else {
         let arrow = document.querySelector("#sortTitle .fa-chevron-down");
         arrow.style.display = "block"; 
+        arrow.style.color = "white";
         popularite.classList.add("hidden-sort");
         date.classList.add("hidden-sort");
         title.setAttribute("aria-selected","");
