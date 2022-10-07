@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/photographer.css" rel="stylesheet" type="text/css" />
@@ -22,23 +22,23 @@
       <div class="sortElement">
         
         <h3>Trier par</h3>
-        <div class="btn-container">
+        <div class="btn-container" role="button" aria-haspopup="listbox" aria-expanded="false">
 
-          <div class="sort-container" id="sortPopularite" style="border-bottom: none;">
+          <div class="sort-container" id="sortPopularite" style="border-bottom: none;" role="listbox">
             <label for="Popularite" class="hidden-label">Popularité</label>
-            <input class="btn-sort" type="button" id="Popularite" value="Popularite" >
+            <input class="btn-sort" type="button" role="button" aria-pressed="false" id="Popularite" value="Popularite" aria-labelledby="Popularite">
             <i class="fa-solid fa-chevron-down" style="display: block;"></i>
           </div>
 
-          <div class="sort-container hidden-sort" id="sortDate">
+          <div class="sort-container hidden-sort" id="sortDate" role="listbox" >
             <label for="Date" class="hidden-label">Date</label>
-            <input class="btn-sort" type="button" id="Date" value="Date" >
+            <input class="btn-sort" type="button" role="button" aria-pressed="false" id="Date" value="Date" aria-labelledby="Date">
             <i class="fa-solid fa-chevron-down"></i>
           </div>
 
-          <div class="sort-container hidden-sort" id="sortTitle">
+          <div class="sort-container hidden-sort" id="sortTitle" role="listbox" aria-labelledby="Titre">
             <label for="Titre" class="hidden-label">Titre</label>
-            <input class="btn-sort" type="button" id="Title" value="Titre" >
+            <input class="btn-sort" type="button" role="button" aria-pressed="false" id="Title" value="Titre" aria-labelledby="Titre">
             <i class="fa-solid fa-chevron-down"></i>
           </div>  
 
@@ -54,7 +54,7 @@
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer le formulaire de contact"/>
           <h3 id="idName"></h3>
         </header>
 				<form>

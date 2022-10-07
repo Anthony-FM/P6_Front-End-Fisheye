@@ -132,6 +132,8 @@ a{
     padding: 0;
     position: absolute;
     width: 1px;
+    font-size: 16px;
+    font-weight: 800;
 }
 
 .btn-sort {
@@ -150,6 +152,10 @@ a{
     cursor: pointer;
     position: relative;
 
+}
+
+.btn-sort:focus {
+    border: 2px white solid;
 }
 
 .sort-container i {

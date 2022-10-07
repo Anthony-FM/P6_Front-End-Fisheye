@@ -130,8 +130,9 @@ function mediaFactory(data){
         heartNumber.className = "heart-number";
         heartNumber.textContent = likes;
 
-        let heart = document.createElement( 'i' );
+        let heart = document.createElement( 'em' );
         heart.className = "fa-regular fa-heart";
+        heart.setAttribute('aria-label', 'likes')
         heart.addEventListener('click', () => {
             if(heart.classList.contains = "fa-regular"){
                 heart.classList.replace("fa-regular", "fa-solid");
@@ -168,7 +169,7 @@ function mediaFactory(data){
             totals = totals + value.likes;
         }
         
-        totalHeartNumber.innerHTML = `${totals} <i class="fa-solid fa-heart" aria-hidden="true" title="Nombre de like total de toutes les photos"></i><br/>
+        totalHeartNumber.innerHTML = `${totals} <em class="fa-solid fa-heart" aria-hidden="true" title="Nombre de like total de toutes les photos"></em><br/>
         <span class="screenreader-text">Nombre de like pour cette photo</span>`;
 
         
