@@ -12,33 +12,33 @@
   <body>
     <header role="banner" aria-label="banner" id="header">
       <a href="index.html">
-        <img src="assets/images/logo.png" class="logo" role="img" aria-label="Fisheye Page d'Accueil" alt="Fisheye Page d'Accueil" dir="ltr" />
+        <img src="assets/images/logo.png" class="logo" role="img" aria-label="Fisheye Page d'Accueil" alt="Fisheye Page d'Accueil" dir="ltr" tabindex="1" />
       </a>
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button" onclick="displayModal()" aria-labelledby="contact-me" tabindex="2">Contactez-moi</button>
       </div>
       <div class="sortElement">
         
-        <h3>Trier par</h3>
-        <div class="btn-container" role="button" aria-haspopup="listbox" aria-expanded="false">
+        <h3 tabindex="3">Trier par</h3>
+        <div class="btn-container" role="button" aria-haspopup="listbox" aria-expanded="false" tabindex="4">
 
           <div class="sort-container" id="sortPopularite" style="border-bottom: none;" role="listbox">
             <label for="Popularite" class="hidden-label">Popularité</label>
-            <input class="btn-sort" type="button" role="button" aria-pressed="false" id="Popularite" value="Popularite" aria-labelledby="Popularite">
+            <input class="btn-sort" type="button" role="button" aria-pressed="false" id="Popularite" value="Popularite" aria-labelledby="Popularite" tabindex="5">
             <em class="fa-solid fa-chevron-down" style="display: block;"></em>
           </div>
 
           <div class="sort-container hidden-sort" id="sortDate" role="listbox" >
             <label for="Date" class="hidden-label">Date</label>
-            <input class="btn-sort" type="button" role="button" aria-pressed="false" id="Date" value="Date" aria-labelledby="Date">
+            <input class="btn-sort" type="button" role="button" aria-pressed="false" id="Date" value="Date" aria-labelledby="Date" tabindex="5">
             <em class="fa-solid fa-chevron-down"></em>
           </div>
 
           <div class="sort-container hidden-sort" id="sortTitle" role="listbox" aria-labelledby="Titre">
             <label for="Titre" class="hidden-label">Titre</label>
-            <input class="btn-sort" type="button" role="button" aria-pressed="false" id="Title" value="Titre" aria-labelledby="Titre">
+            <input class="btn-sort" type="button" role="button" aria-pressed="false" id="Title" value="Titre" aria-labelledby="Titre" tabindex="5">
             <em class="fa-solid fa-chevron-down"></em>
           </div>  
 
@@ -50,34 +50,48 @@
 
       </section>
     </main>
-    <div id="contact_modal" class="contact-modal">
+    <div id="contact_modal" class="contact-modal" role="dialog" aria-hidden="true" tabindex="0" aria-describedby="contact-me">
 			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer le formulaire de contact"/>
-          <h3 id="idName"></h3>
+				<header class="header-contact">
+          
+          <h1 id="contact-me">Contactez-moi</h1>
+          <a id="closeModal">
+            <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer le formulaire de contact" aria-label="Fermer le formulaire de contact" tabindex="0" role="button" />
+          </a>
+         
         </header>
 				<form>
 					<div>
-						<label for="firstname">Prénom</label>
-						<input type="text" id="firstname" />
+						<label for="firstname" id="Prenom">Prénom</label>
+						<input type="text" id="firstName" aria-labelledby="Prenom"/>
 					</div>
 					<div>
-						<label for="lastname">Nom</label>
-						<input type="text" id="lastname" />
+						<label for="lastname" id="Nom">Nom</label>
+						<input type="text" id="lastName" aria-labelledby="Nom" />
 					</div>
 					<div>
-						<label for="email">email</label>
-						<input type="email" id="email" />
+						<label for="email" id="emailID">email</label>
+						<input type="email" id="email" aria-labelledby="emailID"/>
 					</div>
 					<div>
-						<label for="messages">Votre message</label>
-						<textarea type="text" id="messages"></textarea>
+						<label for="messages" id="messagesID">Votre message</label>
+						<textarea type="text" id="messages" aria-labelledby="messagesID"></textarea>
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <button class="contact_button" onclick="validate(event)">Envoyer</button>
 				</form>
 			</div>
+      <div class="modal">
+
+      </div>
 		</div>
+    <div id="lightbox" class="lightbox-modal" role="dialog" aria-hidden="true" tabindex="0" aria-describedby="">
+      <div class="lightbox-container">
+        <div class="left-arrow"></div>
+         <article class="lightbox-picture"></article>
+        <div class="right-arrow"></div>
+      </div>
+
+    </div>
     <!-- Factories -->
     <script src="./scripts/factories/photographer.js"></script>
     <!-- Pages -->
