@@ -8,10 +8,28 @@ const populariteBtn = document.getElementById("Popularite")
 const dateBtn = document.getElementById("Date")
 const titleBtn = document.getElementById("Title")
 
+async function createSortByPopularity(){
+    const id = await getUrlID();
+    console.log(id);
+    const thePhotographer = await getPhotographer(id);  
+    console.log(thePhotographer)
+	const reordonatePicturesByPopularity = Array.from(thePhotographer.media);
+    console.log(reordonatePicturesByPopularity)
+	reordonatePicturesByPopularity.sort(function (a, b) {
+		// B - A (et pas A - B)
+		return b.likes - a.likes;
+	});
+    const media = reordonatePicturesByPopularity;
+    const reordonatePicturesDataByPopularity = {...thePhotographer, media}
+    console.log(reordonatePicturesDataByPopularity);
+    document.querySelector(".user-pictures").innerHTML="";
+    document.querySelector(".lightbox-pictures").innerHTML="";
+    await CreatePicture(reordonatePicturesDataByPopularity);
+    await CreateLightboxContent(reordonatePicturesDataByPopularity);
+    await CreateAllLikes(reordonatePicturesDataByPopularity);
+}
 
-
-
-function selectPopulariteSort(event) {
+async function selectPopulariteSort(event) {
     
     event.stopPropagation();
     if((popularite.classList.contains("hidden-sort")) || (date.classList.contains("hidden-sort")) || (title.classList.contains("hidden-sort"))){
@@ -40,6 +58,8 @@ function selectPopulariteSort(event) {
         popularite.setAttribute("aria-activedescendant","Popularite");
         btnContainer.setAttribute("aria-expanded","false");
         btnContainer.setAttribute("aria-pressed","true");
+              
+        await createSortByPopularity();
     } 
    
 }
@@ -70,6 +90,28 @@ function actionButtonKeyupHandlerPopularite(event) {
     }
 }
 
+async function createSortBydate(){
+    const id = await getUrlID();
+    console.log(id);
+    const thePhotographer = await getPhotographer(id);  
+    console.log(thePhotographer)
+	const reordonatePicturesByDate = Array.from(thePhotographer.media);
+    console.log(reordonatePicturesByDate)
+	reordonatePicturesByDate.sort(function (a, b) {
+		// B - A (et pas A - B)
+		return Date.parse(b.date) - Date.parse(a.date);
+	});
+    const media = reordonatePicturesByDate;
+    console.log(media)
+    const reordonatePicturesDataByDate = {...thePhotographer, media}
+    console.log(reordonatePicturesDataByDate);
+    document.querySelector(".user-pictures").innerHTML="";
+    document.querySelector(".lightbox-pictures").innerHTML="";
+    await CreatePicture(reordonatePicturesDataByDate);
+    await CreateLightboxContent(reordonatePicturesDataByDate);
+    await CreateAllLikes(reordonatePicturesDataByDate);
+}
+
 function selectDateSort(event) {
    
     event.stopPropagation();
@@ -96,6 +138,7 @@ function selectDateSort(event) {
         date.setAttribute("aria-activedescendant","");
         btnContainer.setAttribute("aria-expanded","false");
         btnContainer.setAttribute("aria-pressed","true");
+        createSortBydate();
               
     }
 }
@@ -104,9 +147,9 @@ function actionButtonKeydownHandlerDate(event) {
     // The action button is activated by space on the keyup event, but the
     // default action for space is already triggered on keydown. It needs to be
     // prevented to stop scrolling the page before activating the button.
-    if (event.keyCode === 32) {
-      event.preventDefault();
-    }
+        // if (event.keyCode === 32) {
+        //   event.preventDefault();
+        // }
     // If enter is pressed, activate the button
      if (event.keyCode === 13) {
       
@@ -124,6 +167,28 @@ function actionButtonKeyupHandlerDate(event) {
         
         selectDateSort(event);
     }
+}
+
+async function createSortBytitle(){
+    const id = await getUrlID();
+    console.log(id);
+    const thePhotographer = await getPhotographer(id);  
+    console.log(thePhotographer)
+	const reordonatePicturesByTitle = Array.from(thePhotographer.media);
+    console.log(reordonatePicturesByTitle)
+	reordonatePicturesByTitle.sort(function (a, b) {
+		// B - A (et pas A - B)
+		return b.title.length - a.title.length;
+	});
+    const media = reordonatePicturesByTitle;
+    console.log(media)
+    const reordonatePicturesDataByTitle = {...thePhotographer, media}
+    console.log(reordonatePicturesDataByTitle);
+    document.querySelector(".user-pictures").innerHTML="";
+    document.querySelector(".lightbox-pictures").innerHTML="";
+    await CreatePicture(reordonatePicturesDataByTitle);
+    await CreateLightboxContent(reordonatePicturesDataByTitle);
+    await CreateAllLikes(reordonatePicturesDataByTitle);
 }
 
 function selectTitleSort(event) {
@@ -154,6 +219,7 @@ function selectTitleSort(event) {
         title.setAttribute("aria-activedescendant","");
         btnContainer.setAttribute("aria-expanded","false"); 
         btnContainer.setAttribute("aria-pressed","true"); 
+        createSortBytitle();
     } 
    
 }
