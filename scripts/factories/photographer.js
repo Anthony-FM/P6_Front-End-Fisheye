@@ -11,13 +11,11 @@
 
         const sectionImageArticle = document.createElement( 'section' ); // création de la section cliquable
         sectionImageArticle.className = "photographer_pictureName";
-        
 
         const sectionImageArticleLink = document.createElement( 'a' ); // Création des liens
         sectionImageArticleLink.appendChild(sectionImageArticle);
         sectionImageArticleLink.setAttribute("id", id);
         sectionImageArticleLink.setAttribute("href", `photographer.html?id=${id}&${name}`);
-        
 
         const footerImageArticle = document.createElement( 'footer' ); // création du footer pour le contenu
 
@@ -110,16 +108,20 @@ function mediaFactory(data){
         header.className = "picture-container";        
 
         let imgPictures = document.createElement( 'img' );
-        imgPictures.setAttribute("src", urlName + image);
-        imgPictures.setAttribute("alt", "Picture of " + title );
+        imgPictures.setAttribute("src", `${urlName}`);
+        imgPictures.setAttribute("alt", title );
+        imgPictures.setAttribute('id', id);
+        imgPictures.setAttribute('onclick', "displayLightbox(id)");
         imgPictures.setAttribute("tabindex","6");
 
         let videoPictures = document.createElement( 'video' );
         videoPictures.setAttribute("controls","");
+        videoPictures.setAttribute("id", id);
         let sourceVideo = document.createElement( 'source' );
-        sourceVideo.setAttribute("src", urlName + video);
+        sourceVideo.setAttribute("src", urlName);
         sourceVideo.setAttribute("alt", "Video of" + title );
         sourceVideo.setAttribute("type", "video/mp4");
+        sourceVideo.setAttribute("poster", "placeholder.png");
         videoPictures.appendChild(sourceVideo);
         videoPictures.setAttribute("tabindex","6");
 
@@ -128,7 +130,6 @@ function mediaFactory(data){
         } else {
             header.appendChild(videoPictures);
         }
-        
 
         let footerPicture = document.createElement( 'footer' );
         footerPicture.className = "footer-pictures";
@@ -151,13 +152,18 @@ function mediaFactory(data){
         heart.className = "fa-regular fa-heart";
         heart.setAttribute('role','button');                            
         heart.setAttribute("tabindex","6");
+        heart.setAttribute("onclick","likes()");
         heart.addEventListener('click', () => {
-            if(heart.classList.contains = "fa-regular"){
+            if(heart.classList.contains("fa-regular")){
                 heart.classList.replace("fa-regular", "fa-solid");
                 heart.classList.add("heart");
+                heartNumber.textContent = "";
+                heartNumber.textContent = likes + 1;
             } else {
                 heart.classList.replace("fa-solid", "fa-regular");
                 heart.classList.remove("heart");
+                heartNumber.textContent = "";
+                heartNumber.textContent = likes;
             }
                 
         })
@@ -196,8 +202,6 @@ function mediaFactory(data){
         <span class="screenreader-text">Nombre de like pour ce photographe  </span>`;
         totalHeartNumber.setAttribute('tabindex', '7');
 
-        
-
         let priceByDay = document.createElement( 'p' );
         priceByDay.setAttribute('id','priceByDay')
         priceByDay.innerHTML = `${price}€ / jour <br/>
@@ -210,7 +214,49 @@ function mediaFactory(data){
         return countContainer;
     }   
 
-    return {id, photographerId, title, image, likes, date, price,getUserMediasDOM, getLikesNumbers}
+    function getLightbox(){
+        let divPicture = document.createElement( 'div' );
+        divPicture.className = "lightbox-picture-container";
+        
+        let imgBox = document.createElement('img');
+        imgBox.setAttribute('src', urlName);
+        imgBox.setAttribute('alt', title);
+        imgBox.setAttribute('tabindex', "0");
+        imgBox.className = "lightbox-pictures";
+
+        let videoPictures = document.createElement( 'video' );
+        videoPictures.setAttribute("controls","");
+        videoPictures.setAttribute("id", id);
+        videoPictures.className = "lightbox-pictures";
+        let sourceVideo = document.createElement( 'source' );
+        sourceVideo.setAttribute("src", urlName);
+        sourceVideo.setAttribute("alt", "Video of" + title );
+        sourceVideo.setAttribute("type", "video/mp4");
+        sourceVideo.setAttribute("poster", "placeholder.png");
+        videoPictures.appendChild(sourceVideo);
+        videoPictures.setAttribute("tabindex","0");
+
+        if (image) {
+            divPicture.appendChild(imgBox);
+        } else {
+            divPicture.appendChild(videoPictures);
+        }
+
+        let titlePicture = document.createElement( 'h2' );
+        titlePicture.textContent = title;
+        titlePicture.setAttribute('tabindex', "0");
+
+        let articlePicture = document.createElement('article');
+        articlePicture.className = "lightbox-pictures-article";
+        articlePicture.setAttribute("aria-hidden","true");
+        articlePicture.setAttribute('id', "1"+ id);
+        articlePicture.appendChild(divPicture);
+        articlePicture.appendChild(titlePicture);
+
+        return articlePicture;
+    }
+
+    return {id, photographerId, title, image, likes, date, price,getUserMediasDOM, getLikesNumbers, getLightbox}
 }
 
 
