@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <link href="css/photographer.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/photographer.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <script src="https://kit.fontawesome.com/d0ee6e80bb.js" crossorigin="anonymous"></script>
@@ -10,9 +10,9 @@
     <title>Fisheye - photographe </title>
   </head>
   <body>
-    <header role="banner" aria-label="banner" id="header">
-      <a href="index.html">
-        <img src="assets/images/logo.png" class="logo" role="img" aria-label="Fisheye Page d'Accueil" alt="Fisheye Page d'Accueil" dir="ltr" tabindex="1" />
+    <header aria-label="banner" id="header">
+      <a href="index.html" tabindex="1">
+        <img src="assets/images/logo.png" class="logo"  aria-label="Fisheye Page d'Accueil" alt="Fisheye Page d'Accueil" dir="ltr">
       </a>
     </header>
     <main id="main">
@@ -22,23 +22,23 @@
       <div class="sortElement">
         
         <h3 tabindex="3">Trier par</h3>
-        <div class="btn-container" role="button" aria-haspopup="listbox" aria-expanded="false" tabindex="4">
+        <div class="btn-container" role="listbox" aria-haspopup="listbox" aria-expanded="false" tabindex="4">
 
-          <div class="sort-container" id="sortPopularite" style="border-bottom: none;" role="listbox">
+          <div class="sort-container" id="sortPopularite" style="border-bottom: none;">
             <label for="Popularite" class="hidden-label">Popularité</label>
-            <input class="btn-sort" type="button" role="button" aria-pressed="false" id="Popularite" value="Popularite" aria-labelledby="Popularite" tabindex="5">
+            <input class="btn-sort" type="button" aria-pressed="false" id="Popularite" value="Popularite" aria-labelledby="Popularite" tabindex="5">
             <em class="fa-solid fa-chevron-down" style="display: block;"></em>
           </div>
 
-          <div class="sort-container hidden-sort" id="sortDate" role="listbox" >
+          <div class="sort-container hidden-sort" id="sortDate">
             <label for="Date" class="hidden-label">Date</label>
-            <input class="btn-sort" type="button" role="button" aria-pressed="false" id="Date" value="Date" aria-labelledby="Date" tabindex="5">
+            <input class="btn-sort" type="button" aria-pressed="false" id="Date" value="Date" aria-labelledby="Date" tabindex="5">
             <em class="fa-solid fa-chevron-down"></em>
           </div>
 
-          <div class="sort-container hidden-sort" id="sortTitle" role="listbox" aria-labelledby="Titre">
-            <label for="Titre" class="hidden-label">Titre</label>
-            <input class="btn-sort" type="button" role="button" aria-pressed="false" id="Title" value="Titre" aria-labelledby="Titre" tabindex="5">
+          <div class="sort-container hidden-sort" id="sortTitle" >
+            <label for="Title" class="hidden-label">Titre</label>
+            <input class="btn-sort" type="button" aria-pressed="false" id="Title" value="Titre" aria-labelledby="Title" tabindex="5">
             <em class="fa-solid fa-chevron-down"></em>
           </div>  
 
@@ -46,58 +46,59 @@
         
       </div>
 
-      <section id="user-pictures" class="user-pictures">
+      <aside id="user-pictures" class="user-pictures">
 
-      </section>
+      </aside>
     </main>
     <div id="contact_modal" class="contact-modal" role="dialog" aria-hidden="true" tabindex="0" aria-describedby="contact-me">
 			<div class="modal">
 				<header class="header-contact">
           
           <h1 id="contact-me">Contactez-moi</h1>
-          <a id="closeModal">
-            <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer le formulaire de contact" aria-label="Fermer le formulaire de contact" tabindex="0" role="button" />
+          <a id="closeModal" tabindex="0" role="button" >
+            <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer le formulaire de contact" aria-label="Fermer le formulaire de contact">
           </a>
          
         </header>
 				<form>
 					<div>
-						<label for="firstname" id="Prenom">Prénom</label>
-						<input type="text" id="firstName" aria-labelledby="Prenom"/>
+						<label for="firstName" id="Prenom" aria-label="prénom">Prénom </label>
+						<input type="text" id="firstName" name="firstname" aria-labelledby="Prenom">
 					</div>
 					<div>
-						<label for="lastname" id="Nom">Nom</label>
-						<input type="text" id="lastName" aria-labelledby="Nom" />
+						<label for="lastName" id="Nom" aria-label="nom">Nom </label>
+						<input type="text" id="lastName" name="lastname" aria-labelledby="Nom">
 					</div>
 					<div>
 						<label for="email" id="emailID">email</label>
-						<input type="email" id="email" aria-labelledby="emailID"/>
+						<input type="email" id="email" aria-labelledby="emailID">
 					</div>
 					<div>
 						<label for="messages" id="messagesID">Votre message</label>
-						<textarea type="text" id="messages" aria-labelledby="messagesID"></textarea>
+						<textarea id="messages" aria-labelledby="messagesID"></textarea>
 					</div>
           <button class="contact_button" onclick="validate(event)">Envoyer</button>
 				</form>
 			</div>
 		</div>
 
-    <div id="lightbox" class="lightbox-modal" role="dialog" aria-hidden="true" tabindex="0" aria-describedby="">
+    <div id="lightbox" class="lightbox-modal" role="dialog" aria-hidden="true" tabindex="0" aria-describedby="lightbox">
 
       <div class="lightbox-container">
 
-        <div class="left-arrow">
-          <em class="fa-solid fa-chevron-up" tabindex="0" aria-label="Voir Précédemment"></em>
+        <div class="left-arrow" >
+          <em class="fa-solid fa-chevron-up" tabindex="0" title="Voir Précédemment"></em>
         </div>
 
-         <section class="lightbox-pictures">
-         </section>
+         <aside class="lightbox-pictures">
+         </aside>
 
-        <div class="right-arrow">
-          <em class="fa-sharp fa-solid fa-chevron-up" tabindex="0" aria-label="Voir suivant"></em>
+        <div class="right-arrow" >
+          <em class="fa-sharp fa-solid fa-chevron-up" tabindex="0" title="Voir suivant"></em>
         </div>
-        <div class="close-lightbox">
-          <em class="fa-sharp fa-solid fa-xmark" tabindex="0" aria-label="Cliquez pour fermer la lightbox"></em>
+
+        <div class="close-lightbox" title="Cliquez pour fermer la lightbox">
+          <em class="fa-sharp fa-solid fa-xmark" tabindex="0" ></em>
         </div>
 
       </div>

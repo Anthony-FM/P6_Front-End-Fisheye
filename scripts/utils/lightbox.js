@@ -72,7 +72,7 @@ function openLightbox(){
 async function displayLightbox(id){
    
     const imageLightbox = document.getElementById("1" + id);
-    if(imageLightbox.title = id){
+    if(imageLightbox.id){
         imageLightbox.classList.add("active");        
         imageLightbox.setAttribute("aria-hidden","false");        
         openLightbox();
