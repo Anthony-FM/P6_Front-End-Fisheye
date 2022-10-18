@@ -87,10 +87,9 @@ async function putUserName(data) {
 }
 
 async function initName() {
-    const id = await getUrlID();
-    const data = await getUserById(id);
-     putUserName(data);
-
+  const id = await getUrlID();
+  const data = await getUserById(id);
+  putUserName(data);
 }
 
 initName();
@@ -100,7 +99,6 @@ const last = document.getElementById("lastName");
 const email = document.getElementById("email");
 const message = document.getElementById("messages");
 const nameContact = document.querySelector(".modal header h1");
-console.log(nameContact.textContent);
 
 // Erreur First
 let spanErrorFirst = document.createElement('span');
@@ -184,26 +182,28 @@ email.addEventListener('input', function(event){
 async function validate(event){
     event.preventDefault();
     event.stopPropagation();
+    const nameContact = document.querySelector(".modal header h1");
+    const nameContent = nameContact.textContent;
+    const name = nameContent.substring(13);
   
     if(firstTest && lastTest && emailTest ){
         
-        console.log(`Votre Prénom: ${first}
-        Votre Nom: ${last}
-        Votre adresse email: ${email}
-        Votre message a ${nameContact}:
-        ${message}`);
+      console.log(`Votre Prénom: ${first.value}
+      Votre Nom: ${last.value}
+      Votre adresse email: ${email.value}      
+      Votre message a ${name}:
 
-        // On supprime les données une fois que c'est validé et la page rafraichit
-        first.value = "";
-        last.value = "";
-        email.value = "";
-        // location.reload();
-        
-        return;
-      }  
-        
-     
-  
+      ${message.value}`);
+
+      // On supprime les données une fois que c'est validé et la page rafraichit
+      first.value = "";
+      last.value = "";
+      email.value = "";
+      message.value = "";
+      // location.reload();
+      
+      return;
+    }  
     // Si les valeurs ne sont pas remplie avant la validation, on averti l'utilisateur
     if(!first.value) {
       spanErrorFirst.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
@@ -212,7 +212,7 @@ async function validate(event){
       spanErrorLast.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
     }
     if (!email.value) {
-        spanErrorEmail.innerHTML = "Veuillez renseigner un Email";
+      spanErrorEmail.innerHTML = "Veuillez renseigner un Email";
     }
   
   //test d'erreur lors de la validation
