@@ -81,11 +81,25 @@
 				</form>
 			</div>
 		</div>
+
     <div id="lightbox" class="lightbox-modal" role="dialog" aria-hidden="true" tabindex="0" aria-describedby="">
+
       <div class="lightbox-container">
-        <div class="left-arrow"></div>
-         <article class="lightbox-picture"></article>
-        <div class="right-arrow"></div>
+
+        <div class="left-arrow">
+          <em class="fa-solid fa-chevron-up" tabindex="0" aria-label="Voir Précédemment"></em>
+        </div>
+
+         <section class="lightbox-pictures">
+         </section>
+
+        <div class="right-arrow">
+          <em class="fa-sharp fa-solid fa-chevron-up" tabindex="0" aria-label="Voir suivant"></em>
+        </div>
+        <div class="close-lightbox">
+          <em class="fa-sharp fa-solid fa-xmark" tabindex="0" aria-label="Cliquez pour fermer la lightbox"></em>
+        </div>
+
       </div>
 
     </div>
@@ -96,6 +110,8 @@
     <!-- Utils  -->
     <script src="./scripts/utils/contactForm.js"></script>
     <script src="./scripts/utils/sortby.js"></script>
+    <script src="./scripts/utils/lightbox.js"></script>
+    <script src="./scripts/utils/likes.js"></script>
     
   </body>
 </html>
