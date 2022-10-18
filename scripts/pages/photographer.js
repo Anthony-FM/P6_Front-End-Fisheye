@@ -42,15 +42,17 @@ async function CreateId(data) {
 async function CreatePicture(data) {    
     
     const photographerPicture = document.getElementById('user-pictures'); 
-    let urlName = `./assets/${data.name}/`;
-
+    
     data.media.forEach((media) => {
+        let urlName = `./assets/${data.name}/` + (media.image ? media.image : media.video);
         let medias = { ...media, urlName}
         const pictureDOM = mediaFactory(medias);
         const pictureArticle = pictureDOM.getUserMediasDOM();
         photographerPicture.appendChild(pictureArticle);
     })
 }
+
+
 
 async function CreateAllLikes(data){
     const photographerPicture = document.getElementById('user-pictures');
@@ -61,13 +63,31 @@ async function CreateAllLikes(data){
     photographerPicture.appendChild(likesAndPrices);  
 }
 
+async function CreateLightboxContent(data){
+    
+    const leftArrow = document.querySelector('.lightbox-pictures');
+    
+    data.media.forEach((media) => {
+        let urlName = `./assets/${data.name}/`+ (media.image ? media.image : media.video);
+        let medias = { ...media, urlName}
+        const imageData = mediaFactory(medias);
+        const articleImage = imageData.getLightbox();
+        console.log(articleImage);
+        leftArrow.appendChild(articleImage);
+    })
+
+}
+
 async function init() {
     const id = await getUrlID()
     // Récupère les datas du photographe
     const thePhotographer = await getPhotographer(id);
-    await  CreateId(thePhotographer);
+    await CreateId(thePhotographer);    
     await CreatePicture(thePhotographer);
-    await CreateAllLikes(thePhotographer);
+    await CreateAllLikes(thePhotographer);    
+    await CreateLightboxContent(thePhotographer);
 };
 
 init();
+
+
