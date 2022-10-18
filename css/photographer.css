@@ -74,6 +74,7 @@
     height: 100%;
     object-fit: cover;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 
@@ -120,8 +121,9 @@
 
 .heart{
     animation-name: heart;
-    transform: scaleX(0);
+    transform: scaleX(1);
     animation-duration: 3000ms;
+    transition: heart 3000ms;
 }
 
 @keyframe heart{
@@ -130,7 +132,7 @@
     }
 
     to {
-        transform: scaleX(1);
+        transform: scaleX(0.8);
     }
 }
 
@@ -300,4 +302,102 @@ form textarea {
     align-items: center;
   
     color: #640507;
-  }
+}
+
+.lightbox-modal{
+    display: none;
+    flex-direction: row;
+    align-items: end;
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    justify-content: center;
+}
+
+.lightbox-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 86%;
+    height: 98%;
+    background-color: #FFFFFF;
+    position: relative;
+}
+
+.left-arrow{
+    margin-left:3%;
+}
+
+.left-arrow em{
+    rotate: -90deg;
+    font-size: 48px;    
+    color: #911C1C;
+    cursor: pointer;
+}
+
+.right-arrow{
+    margin-right: 4%;
+}
+.right-arrow em{
+    transform: rotate(90deg);
+    font-size: 48px;
+    color: #911C1C;
+    cursor: pointer;
+}
+
+.lightbox-pictures{
+    width: 100%;
+    height: inherit;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    max-width: 1050px;
+}
+
+.lightbox-pictures-article{
+    height: 96%;
+    width: 100%;
+    position: absolute;
+    flex-direction: column;
+    display: none;
+}
+
+.active {
+    display: flex;
+}
+.lightbox-pictures-article h2{
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 31px;
+
+    color: #911C1C;
+}
+
+.close-lightbox{
+    position: absolute;
+    right: 5%;
+    top: 0;
+}
+
+.close-lightbox em{
+    font-size: 42px;    
+    color: #911C1C;
+    cursor: pointer;    
+}
+
+.lightbox-picture-container{
+    width: 100%;
+    height: 90%;
+}
+
+.lightbox-pictures {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
