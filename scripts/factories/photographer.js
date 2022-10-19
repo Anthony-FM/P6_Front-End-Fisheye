@@ -10,7 +10,6 @@ function photographerFactory(data) {
     // Création des articles du DOM pour chaque photographeurs
     function getUserCardDOM() { 
         const article = document.createElement( 'article' ); // Création de la balise article
-        article.setAttribute("tabindex", "2");
         article.setAttribute("aria-label", `Selectionné du profil du photographe ${name}`)
 
         const sectionImageArticle = document.createElement( 'section' ); // création de la section cliquable
@@ -20,6 +19,7 @@ function photographerFactory(data) {
         sectionImageArticleLink.appendChild(sectionImageArticle);
         sectionImageArticleLink.setAttribute("id", id);
         sectionImageArticleLink.setAttribute("href", `photographer.html?id=${id}&${name}`);
+        sectionImageArticleLink.setAttribute("tabindex", "2"); 
 
         const footerImageArticle = document.createElement( 'footer' ); // création du footer pour le contenu
 
@@ -34,11 +34,11 @@ function photographerFactory(data) {
         h2.setAttribute("tabindex", "2");  
         sectionImageArticle.appendChild(h2);
 
-        const pCountry = document.createElement( 'h3' ); // Création des titre h3 pour les villes et pays de chaque photographe
-        pCountry.className = "photographer_country";
-        pCountry.setAttribute("tabindex", "2");  
-        pCountry.textContent = city + ", " + country;
-        footerImageArticle.appendChild(pCountry);
+        const paragrapheForCountry = document.createElement( 'h3' ); // Création des titre h3 pour les villes et pays de chaque photographe
+        paragrapheForCountry.className = "photographer_country";
+        paragrapheForCountry.setAttribute("tabindex", "2");  
+        paragrapheForCountry.textContent = city + ", " + country;
+        footerImageArticle.appendChild(paragrapheForCountry);
 
         const taglines = document.createElement( 'p' ); // Création d'un paragraphe "p" pour leur slogan
         taglines.className = "photographer_tagline";
@@ -123,11 +123,13 @@ function mediaFactory(data){
         imgPictures.setAttribute("tabindex","6");
 
         let videoPictures = document.createElement( 'video' );
-        videoPictures.setAttribute("controls","");
+        // videoPictures.setAttribute("controls","");
         videoPictures.setAttribute("id", id);
+        videoPictures.setAttribute('onclick', "displayLightbox(id)");
+        videoPictures.setAttribute("title", "Video de" + title );
         let sourceVideo = document.createElement( 'source' );
         sourceVideo.setAttribute("src", urlName);
-        sourceVideo.setAttribute("alt", "Video of" + title );
+        sourceVideo.setAttribute("alt", "Video de" + title );
         sourceVideo.setAttribute("type", "video/mp4");
         sourceVideo.setAttribute("poster", "placeholder.png");
         videoPictures.appendChild(sourceVideo);
@@ -171,6 +173,7 @@ function mediaFactory(data){
             if(heart.classList.contains("fa-regular")){
                 heart.classList.replace("fa-regular", "fa-solid");
                 heart.classList.add("heart");
+                heart.setAttribute('aria-label', `La photo a ${likes + 1} likes . Cliquez pour ajouter ou retirer un like`);
                 heartNumber.textContent = "";
                 heartNumber.textContent = likes + 1;
             } else {
@@ -178,13 +181,14 @@ function mediaFactory(data){
                 heart.classList.remove("heart");
                 heartNumber.textContent = "";
                 heartNumber.textContent = likes;
+                heart.setAttribute('aria-label', `La photo a ${likes} likes . Cliquez pour ajouter ou retirer un like`);
             }
                 
         })
 
         heart.setAttribute('aria-hidden','false');
         heart.setAttribute("title", "likes");
-        heart.setAttribute('aria-label', `La photo a ${likes} likes . Cliquez pour ajouter ou retirer un like`);
+        
 
         heartNumberContainer.appendChild(heartNumber);
         heartNumberContainer.appendChild(heart);
@@ -231,7 +235,7 @@ function mediaFactory(data){
     }   
 
     // Fonction qui génère les médias de la lightbox
-    function getLightbox(){
+    function getLightboxMedias(){
         let divPicture = document.createElement( 'div' );
         divPicture.className = "lightbox-picture-container";
         
@@ -278,5 +282,5 @@ function mediaFactory(data){
 
     // La Factory  mediaFactory(data) retourne toutes ses données et fonctions()
     // Ces fonctiones pourront être appelées plutard
-    return {id, photographerId, title, image, likes, date, price, getUserMediasDOM, getLikesNumbers, getLightbox}
+    return {id, photographerId, title, image, likes, date, price, getUserMediasDOM, getLikesNumbers, getLightboxMedias}
 }

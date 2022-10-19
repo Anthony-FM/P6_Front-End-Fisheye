@@ -13,24 +13,20 @@ const titleBtn = document.getElementById("Title")
 // Fonction triant les photos par le nombre de likes en ordre décroissant
 async function createSortByPopularity(){
     const id = await getUrlID();
-    // console.log(id);
     const thePhotographer = await getPhotographer(id);  
-    // console.log(thePhotographer)
 	const reordonatePicturesByPopularity = Array.from(thePhotographer.media);
-    // console.log(reordonatePicturesByPopularity)
 	reordonatePicturesByPopularity.sort(function (a, b) {
-		// B - A (et pas A - B) <= croissant
+		// B - A (et pas A - B) <= décroissant
 		return b.likes - a.likes;
 	});
     const media = reordonatePicturesByPopularity;
-    const reordonatePicturesDataByPopularity = {...thePhotographer, media}
-    // console.log(reordonatePicturesDataByPopularity);
+    const reordonatePicturesDataByPopularity = {...thePhotographer, media};
     document.querySelector(".user-pictures").innerHTML="";
     document.querySelector(".lightbox-pictures").innerHTML="";
     // On génère a nouveau les medias en fonction de "reordonatePicturesDataByPopularity"
-    await CreatePicture(reordonatePicturesDataByPopularity);
-    await CreateLightboxContent(reordonatePicturesDataByPopularity);
-    await CreateAllLikes(reordonatePicturesDataByPopularity);
+    await displayMedias(reordonatePicturesDataByPopularity);
+    await createLightboxContent(reordonatePicturesDataByPopularity);
+    await createAllLikes(reordonatePicturesDataByPopularity);
 }
 
 // Fonction qui ouvre le modal de trie ou selectionne le trie par popularité
@@ -82,26 +78,22 @@ function actionButtonKeyupHandlerPopularite(event) {
 // Fonction triant les photos par la date de création en ordre décroissant
 async function createSortBydate(){
     const id = await getUrlID();
-    // console.log(id);
-    const thePhotographer = await getPhotographer(id);  
-    // console.log(thePhotographer)
+    const thePhotographer = await getPhotographer(id); 
 	const reordonatePicturesByDate = Array.from(thePhotographer.media);
     // console.log(reordonatePicturesByDate)
 	reordonatePicturesByDate.sort(function (a, b) {
-		// B - A (et pas A - B) <= croissant
+		//  A - B <= croissant
         // Date.parse permet de transformer la date en un nombre
 		return Date.parse(b.date) - Date.parse(a.date);
 	});
     const media = reordonatePicturesByDate;
-    // console.log(media)
-    const reordonatePicturesDataByDate = {...thePhotographer, media}
-    // console.log(reordonatePicturesDataByDate);
+    const reordonatePicturesDataByDate = {...thePhotographer, media};
     document.querySelector(".user-pictures").innerHTML="";
     document.querySelector(".lightbox-pictures").innerHTML="";
     // On génère a nouveau les medias en fonction de "reordonatePicturesDataByDate"
-    await CreatePicture(reordonatePicturesDataByDate);
-    await CreateLightboxContent(reordonatePicturesDataByDate);
-    await CreateAllLikes(reordonatePicturesDataByDate);
+    await displayMedias(reordonatePicturesDataByDate);
+    await createLightboxContent(reordonatePicturesDataByDate);
+    await createAllLikes(reordonatePicturesDataByDate);
 }
 
 // Fonction qui ouvre le modal de trie ou selectionne le trie par date de création
@@ -147,25 +139,20 @@ function actionButtonKeyupHandlerDate(event) {
 // Fonction triant les photos par la longueur de leurs titres en ordre décroissant
 async function createSortBytitle(){
     const id = await getUrlID();
-    // console.log(id);
-    const thePhotographer = await getPhotographer(id);  
-    // console.log(thePhotographer)
+    const thePhotographer = await getPhotographer(id); 
 	const reordonatePicturesByTitle = Array.from(thePhotographer.media);
-    // console.log(reordonatePicturesByTitle)
 	reordonatePicturesByTitle.sort(function (a, b) {
-		// B - A (et pas A - B)
-		return b.title.length - a.title.length;
+		// A - B en ordre croissant
+		return a.title.localeCompare(b.title); // localCompare compare l'alphabet entre a et b
 	});
     const media = reordonatePicturesByTitle;
-    // console.log(media)
-    const reordonatePicturesDataByTitle = {...thePhotographer, media}
-    // console.log(reordonatePicturesDataByTitle);
+    const reordonatePicturesDataByTitle = {...thePhotographer, media};
     document.querySelector(".user-pictures").innerHTML="";
     document.querySelector(".lightbox-pictures").innerHTML="";
     // On génère a nouveau les medias en fonction de "reordonatePicturesDataByTitle"
-    await CreatePicture(reordonatePicturesDataByTitle);
-    await CreateLightboxContent(reordonatePicturesDataByTitle);
-    await CreateAllLikes(reordonatePicturesDataByTitle);
+    await displayMedias(reordonatePicturesDataByTitle);
+    await createLightboxContent(reordonatePicturesDataByTitle);
+    await createAllLikes(reordonatePicturesDataByTitle);
 }
 
 

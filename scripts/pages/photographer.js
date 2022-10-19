@@ -30,7 +30,7 @@ async function getPhotographer(id) {
 }
 
 // Fonction récupérant l'objet identifiant le photographe : Nom, prenom, photo de profil, citation, prix etc...
-async function CreateId(data) {
+async function createId(data) {
 
     const photographerID = photographerFactory(data); // Récupération de l'objet via la Factory Photographer
     const photographerHeader = document.querySelector('.photograph-header');
@@ -41,7 +41,7 @@ async function CreateId(data) {
 }
 
 // Fonction récupérant les objets des medias du photographe
-async function CreatePicture(data) {    
+async function displayMedias(data) {    
     
     const photographerPicture = document.getElementById('user-pictures'); 
     
@@ -57,17 +57,15 @@ async function CreatePicture(data) {
 }
 
 // Fonction permettant de récupérer tous les likes de chaque photo
-async function CreateAllLikes(data){
+async function createAllLikes(data){
     const photographerPicture = document.getElementById('user-pictures');
     const datalikesAndPrices = mediaFactory(data);
-    // console.log(datalikesAndPrices)
     const likesAndPrices = datalikesAndPrices.getLikesNumbers();
-    // console.log(likesAndPrices)
     photographerPicture.appendChild(likesAndPrices);  
 }
 
 // Fonction recupérant chaque objet de la lightbox 
-async function CreateLightboxContent(data){
+async function createLightboxContent(data){
     
     const leftArrow = document.querySelector('.lightbox-pictures');
     
@@ -77,8 +75,8 @@ async function CreateLightboxContent(data){
         let medias = { ...media, urlName}
         const imageData = mediaFactory(medias);
 
-        // récupération de l'objet via la fonction de la factory getLightbox()
-        const articleImage = imageData.getLightbox(); 
+        // récupération de l'objet via la fonction de la factory getLightboxMedias()
+        const articleImage = imageData.getLightboxMedias(); 
         // console.log(articleImage);
         leftArrow.appendChild(articleImage);
     })
@@ -90,10 +88,10 @@ async function init() {
     const id = await getUrlID()
     // Récupère les datas du photographe
     const thePhotographer = await getPhotographer(id);
-    await CreateId(thePhotographer);    
-    await CreatePicture(thePhotographer);
-    await CreateAllLikes(thePhotographer);    
-    await CreateLightboxContent(thePhotographer);
+    await createId(thePhotographer);    
+    await displayMedias(thePhotographer);
+    await createAllLikes(thePhotographer);    
+    await createLightboxContent(thePhotographer);
 };
 
 // Lancement de la fonction init()
