@@ -1,3 +1,4 @@
+//============== Déclaration des variables =================
 const btnContainer = document.querySelector(".btn-container");
 
 const popularite = document.getElementById("sortPopularite");
@@ -7,27 +8,33 @@ const title = document.getElementById("sortTitle");
 const populariteBtn = document.getElementById("Popularite")
 const dateBtn = document.getElementById("Date")
 const titleBtn = document.getElementById("Title")
+//============== Déclaration des variables =================
 
+// Fonction triant les photos par le nombre de likes en ordre décroissant
 async function createSortByPopularity(){
     const id = await getUrlID();
-    console.log(id);
+    // console.log(id);
     const thePhotographer = await getPhotographer(id);  
-    console.log(thePhotographer)
+    // console.log(thePhotographer)
 	const reordonatePicturesByPopularity = Array.from(thePhotographer.media);
-    console.log(reordonatePicturesByPopularity)
+    // console.log(reordonatePicturesByPopularity)
 	reordonatePicturesByPopularity.sort(function (a, b) {
-		// B - A (et pas A - B)
+		// B - A (et pas A - B) <= croissant
 		return b.likes - a.likes;
 	});
     const media = reordonatePicturesByPopularity;
     const reordonatePicturesDataByPopularity = {...thePhotographer, media}
-    console.log(reordonatePicturesDataByPopularity);
+    // console.log(reordonatePicturesDataByPopularity);
     document.querySelector(".user-pictures").innerHTML="";
     document.querySelector(".lightbox-pictures").innerHTML="";
+    // On génère a nouveau les medias en fonction de "reordonatePicturesDataByPopularity"
     await CreatePicture(reordonatePicturesDataByPopularity);
     await CreateLightboxContent(reordonatePicturesDataByPopularity);
     await CreateAllLikes(reordonatePicturesDataByPopularity);
 }
+
+// Fonction qui ouvre le modal de trie ou selectionne le trie par popularité
+// en selectionnant le trie par popularité, on actionne la fonction "createSortByPopularity()"
 
 async function selectPopulariteSort(event) {
     
@@ -64,54 +71,41 @@ async function selectPopulariteSort(event) {
    
 }
 
-function actionButtonKeydownHandlerPopularite(event) {
-    // The action button is activated by space on the keyup event, but the
-    // default action for space is already triggered on keydown. It needs to be
-    // prevented to stop scrolling the page before activating the button.
-    if (event.keyCode === 32) {
-      event.preventDefault();
-    }
-    // If enter is pressed, activate the button
-     if (event.keyCode === 13) {
-      
-      selectPopulariteSort(event);
-    }
-}
-
-/**
- * Activates the action button with the space key.
- *
-// * @param {KeyboardEvent} event
- */
+// Fonction qui enclenche la fonction "selectPopulariteSort(event)" grâce a la pression des bouton "espace" et "entrer"
 function actionButtonKeyupHandlerPopularite(event) {
-    if (event.keyCode === 32) {
+    if (event.keyCode === 13 || event.keyCode === 32) {
         
         selectPopulariteSort(event);
     }
 }
 
+// Fonction triant les photos par la date de création en ordre décroissant
 async function createSortBydate(){
     const id = await getUrlID();
-    console.log(id);
+    // console.log(id);
     const thePhotographer = await getPhotographer(id);  
-    console.log(thePhotographer)
+    // console.log(thePhotographer)
 	const reordonatePicturesByDate = Array.from(thePhotographer.media);
-    console.log(reordonatePicturesByDate)
+    // console.log(reordonatePicturesByDate)
 	reordonatePicturesByDate.sort(function (a, b) {
-		// B - A (et pas A - B)
+		// B - A (et pas A - B) <= croissant
+        // Date.parse permet de transformer la date en un nombre
 		return Date.parse(b.date) - Date.parse(a.date);
 	});
     const media = reordonatePicturesByDate;
-    console.log(media)
+    // console.log(media)
     const reordonatePicturesDataByDate = {...thePhotographer, media}
-    console.log(reordonatePicturesDataByDate);
+    // console.log(reordonatePicturesDataByDate);
     document.querySelector(".user-pictures").innerHTML="";
     document.querySelector(".lightbox-pictures").innerHTML="";
+    // On génère a nouveau les medias en fonction de "reordonatePicturesDataByDate"
     await CreatePicture(reordonatePicturesDataByDate);
     await CreateLightboxContent(reordonatePicturesDataByDate);
     await CreateAllLikes(reordonatePicturesDataByDate);
 }
 
+// Fonction qui ouvre le modal de trie ou selectionne le trie par date de création
+// en selectionnant le trie par date, on actionne la fonction "createSortBydate()"
 function selectDateSort(event) {
    
     event.stopPropagation();
@@ -143,54 +137,40 @@ function selectDateSort(event) {
     }
 }
 
-function actionButtonKeydownHandlerDate(event) {
-    // The action button is activated by space on the keyup event, but the
-    // default action for space is already triggered on keydown. It needs to be
-    // prevented to stop scrolling the page before activating the button.
-        // if (event.keyCode === 32) {
-        //   event.preventDefault();
-        // }
-    // If enter is pressed, activate the button
-     if (event.keyCode === 13) {
-      
-        selectDateSort(event);
-    }
-}
-
-/**
- * Activates the action button with the space key.
- *
-// * @param {KeyboardEvent} event
- */
+// Fonction qui enclenche la fonction "selectPopulariteSort(event)" grâce a la pression des bouton "espace" et "entrer"
 function actionButtonKeyupHandlerDate(event) {
-    if (event.keyCode === 32) {
-        
+    if (event.keyCode === 13 || event.keyCode === 32) {        
         selectDateSort(event);
     }
 }
 
+// Fonction triant les photos par la longueur de leurs titres en ordre décroissant
 async function createSortBytitle(){
     const id = await getUrlID();
-    console.log(id);
+    // console.log(id);
     const thePhotographer = await getPhotographer(id);  
-    console.log(thePhotographer)
+    // console.log(thePhotographer)
 	const reordonatePicturesByTitle = Array.from(thePhotographer.media);
-    console.log(reordonatePicturesByTitle)
+    // console.log(reordonatePicturesByTitle)
 	reordonatePicturesByTitle.sort(function (a, b) {
 		// B - A (et pas A - B)
 		return b.title.length - a.title.length;
 	});
     const media = reordonatePicturesByTitle;
-    console.log(media)
+    // console.log(media)
     const reordonatePicturesDataByTitle = {...thePhotographer, media}
-    console.log(reordonatePicturesDataByTitle);
+    // console.log(reordonatePicturesDataByTitle);
     document.querySelector(".user-pictures").innerHTML="";
     document.querySelector(".lightbox-pictures").innerHTML="";
+    // On génère a nouveau les medias en fonction de "reordonatePicturesDataByTitle"
     await CreatePicture(reordonatePicturesDataByTitle);
     await CreateLightboxContent(reordonatePicturesDataByTitle);
     await CreateAllLikes(reordonatePicturesDataByTitle);
 }
 
+
+// Fonction qui ouvre le modal de trie ou selectionne le trie par longueur du Titre
+// en selectionnant le trie par titre, on actionne la fonction "createSortBytitle()"
 function selectTitleSort(event) {
    
     event.stopPropagation();
@@ -224,44 +204,23 @@ function selectTitleSort(event) {
    
 }
 
-function actionButtonKeydownHandleTitle(event) {
-    // The action button is activated by space on the keyup event, but the
-    // default action for space is already triggered on keydown. It needs to be
-    // prevented to stop scrolling the page before activating the button.
-    if (event.keyCode === 32) {
-      event.preventDefault();
-    }
-    // If enter is pressed, activate the button
-     if (event.keyCode === 13) {
-      
-        selectTitleSort(event);
-    }
-}
-
-/**
- * Activates the action button with the space key.
- *
-// * @param {KeyboardEvent} event
- */
+// Fonction qui enclenche la fonction "selectPopulariteSort(event)" grâce a la pression des bouton "espace" et "entrer"
 function actionButtonKeyupHandlerTitle(event) {
-    if (event.keyCode === 32) {
-        
+    if (event.keyCode === 13 || event.keyCode === 32) {        
         selectTitleSort(event);
     }
 }
 
+// Fonction qui écoute les actions de l'utilisateur
 function initSort() {
 
     populariteBtn.addEventListener('click', selectPopulariteSort);
-    populariteBtn.addEventListener('keydown', actionButtonKeydownHandlerPopularite);
     populariteBtn.addEventListener('keyup', actionButtonKeyupHandlerPopularite);
     
     dateBtn.addEventListener('click', selectDateSort);
-    dateBtn.addEventListener('keydown', actionButtonKeydownHandlerDate);
     dateBtn.addEventListener('keyup', actionButtonKeyupHandlerDate);
     
     titleBtn.addEventListener('click', selectTitleSort);
-    titleBtn.addEventListener('keydown', actionButtonKeydownHandleTitle);
     titleBtn.addEventListener('keyup', actionButtonKeyupHandlerTitle);
 
 }

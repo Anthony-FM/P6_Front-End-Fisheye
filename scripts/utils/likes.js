@@ -1,8 +1,10 @@
+// Fonction qui ajoute ou enlève un like au nombre total de likes de toutes les photos
 async function likes(){
     const id = await getUrlID();
     const data = await getPhotographer(id);
     let totals = 0;  
 
+    // Utiliasation du: for() Object.entrie pour rechercher toutes les valeurs d'un objet
     for(let [key,value] of Object.entries(data.media))
     {
         totals = totals + value.likes;

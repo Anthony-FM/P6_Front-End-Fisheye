@@ -1,4 +1,5 @@
- function displayModal() {
+// Fonction ouvrant le modal
+function displayModal() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "flex";
   modal.setAttribute('aria-hidden', 'false')
@@ -11,7 +12,7 @@
   modal.focus();
   modal.setAttribute('aria-current','page');
 }
-
+// Fonction fermant le modale
 function closeModal() {
     
   const modal = document.getElementById("contact_modal");
@@ -26,6 +27,7 @@ function closeModal() {
   modal.removeAttribute('aria-current','page')
 }
 
+// fonction qui ferme le modale à l'appui du bouton "escape" (dans le modale)
 function escapeCloseModal(event){
   const keycode = event.keycode ? event.keycode : event.which;
   const modal = document.getElementById("contact_modal");
@@ -34,6 +36,7 @@ function escapeCloseModal(event){
   }
 }
 
+// Fonction qui ferme le modal à l'appui du bouton "entrer" (sur l'icone croix)
 function closeModalKeydown(event){
   const keycode = event.keycode ? event.keycode : event.which;  
   if(keycode === 13){
@@ -41,6 +44,7 @@ function closeModalKeydown(event){
   }
 }
 
+// Fonciton qui écoute l'action de l'utilisateur et ferme le modale en conséquence
 function closeModaleEvent() {
     document.getElementById("closeModal").addEventListener('click', closeModal);
     document.getElementById("closeModal").addEventListener('keydown', event => {
@@ -54,31 +58,13 @@ function closeModaleEvent() {
 closeModaleEvent();
 
 
-// RegExp
+// RegExp pour les erreurs
 //==================================================================
 const nameRegex = /^([a-zA-Zéèîïêë]{2,})+$/g; // RegExp pour les Prénoms et Noms
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g; // RegExp pour les adresses emails
 //===================================================================
 
-async function getUrlID() {
-
-    let params = (new URL(document.location)).searchParams;
-    console.log(params);
-    let id = parseInt(params.get('id'));
-    console.log(id);
-
-    return id;
-}
-
-async function getUserById(id) {
-    const photographersJSON = await fetch ("./data/photographers.json");
-    const photographersData = await photographersJSON.json();
-    const photographers = photographersData.photographers;
-
-    const photographer = photographers.filter( photographer => photographer.id === id)[0];
-    return photographer;
-}
-
+// fonction qui créé et ajoute le nom du photographe dans le litre du modale
 async function putUserName(data) {
     const name = document.querySelector(".modal header h1");
     name.setAttribute('tabindex', '0')
@@ -86,20 +72,25 @@ async function putUserName(data) {
     ${data.name}`;
 }
 
+// Fonction récupérant les données et appele la fonction putUserName(data)
 async function initName() {
   const id = await getUrlID();
-  const data = await getUserById(id);
-  putUserName(data);
+  const data = await getPhotographer(id);
+  await putUserName(data);
 }
 
 initName();
 
+// ====== Déclarations des variables à utiliser ===============
 const first = document.getElementById("firstName");
 const last = document.getElementById("lastName");
 const email = document.getElementById("email");
 const message = document.getElementById("messages");
 const nameContact = document.querySelector(".modal header h1");
+// ====== Déclarations des variables à utiliser ===============
 
+
+// ====== Créations des erreur sous les inputs ================
 // Erreur First
 let spanErrorFirst = document.createElement('span');
 first.parentElement.appendChild(spanErrorFirst);
@@ -114,15 +105,17 @@ spanErrorLast.classList.add('textError');
 let spanErrorEmail = document.createElement('span');
 email.parentElement.appendChild(spanErrorEmail);
 spanErrorEmail.classList.add('textError');
+// ====== Créations des erreur sous les inputs ================
 
+// ====== Créations des évenements liés aux erreurs ==============================================
 let firstTest = false;
 first.addEventListener('input', function(event){  
   let firstValue = event.target.value;   
-
-    if(firstValue.length < 2){      
-      spanErrorFirst.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
-      firstTest = false;
-
+  
+  if(firstValue.length < 2){      
+    spanErrorFirst.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+    firstTest = false;
+      
     } else if(!firstValue.match(nameRegex)){ 
       spanErrorFirst.textContent = "Ce champ requiere une prénom valide"; 
       firstTest = false;
@@ -131,7 +124,7 @@ first.addEventListener('input', function(event){
       spanErrorFirst.textContent = "";  
       firstTest = true;
     }
-
+    
     console.log("First name: "+ firstTest);
     return firstTest;
 })
@@ -139,20 +132,20 @@ first.addEventListener('input', function(event){
 let lastTest = false;
 last.addEventListener('input', function(event){  
   let lastValue = event.target.value;   
+  
+  if(lastValue.length < 2){      
+    spanErrorLast.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
+    lastTest = false;
+    
+  } else if(!lastValue.match(nameRegex)){             
+    spanErrorLast.textContent = "Ce champ requiere une nom valide"; 
+    lastTest = false;
 
-    if(lastValue.length < 2){      
-      spanErrorLast.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
-      lastTest = false;
-
-    } else if(!lastValue.match(nameRegex)){             
-      spanErrorLast.textContent = "Ce champ requiere une nom valide"; 
-      lastTest = false;
-
-    } else if(lastValue.match(nameRegex)){
-      spanErrorLast.textContent = ""; 
-      lastTest = true; 
-
-    }
+  } else if(lastValue.match(nameRegex)){
+    spanErrorLast.textContent = ""; 
+    lastTest = true; 
+    
+  }
     console.log("Last name: "+ lastTest);
     return lastTest;
 })
@@ -160,25 +153,28 @@ last.addEventListener('input', function(event){
 let emailTest = false;
 email.addEventListener('input', function(event){  
   let emailValue = event.target.value; 
-
-    if(emailValue == ''){      
+  
+  if(emailValue == ''){      
       spanErrorEmail.textContent = "Veuillez renseigner un Email";
       emailTest = false;
-
+      
     } else if(!emailValue.match(emailRegex)){             
       spanErrorEmail.textContent = "Ce champ requiere un email valide"; 
       emailTest = false;
-
+      
     } else if(emailValue.match(emailRegex)){
       spanErrorEmail.textContent = "";
       emailTest = true;  
-
+      
     }
     console.log("email: "+ emailTest);
     return emailTest;
-})
-
-
+  })
+// ====== Créations des évenements liés aux erreurs ==============================================
+  
+  // Fonction validate qui vérifie les valeurs entrer par l'utilisateur, 
+// envoie un message d'erreur si l'utilisateur oublie des informations
+// envoie un message à la console quand c'est validé et rafraîchit le modale
 async function validate(event){
     event.preventDefault();
     event.stopPropagation();

@@ -1,10 +1,14 @@
- function photographerFactory(data) {
+// La Factory photographerFactory(data)
+// Permet de créer des objets selon les données envoyé en argument.
+// Elle crée des objets sur les information du photographe
+function photographerFactory(data) {
     const { name, id, city, country, tagline, price, portrait, ...media} = data;  // récupération des données via "data"
     // console.log({name,city,country,portrait, tagline, price});
 
     const picture = `assets/Photographers_ID_Photos/${portrait}`; // ajout dans la constante "picture" le lien vers le dossier des photos
 
-    function getUserCardDOM() { // Création des articles du DOM pour chaque photographeurs
+    // Création des articles du DOM pour chaque photographeurs
+    function getUserCardDOM() { 
         const article = document.createElement( 'article' ); // Création de la balise article
         article.setAttribute("tabindex", "2");
         article.setAttribute("aria-label", `Selectionné du profil du photographe ${name}`)
@@ -53,7 +57,8 @@
         return (article);
     }
 
-    function getUserNameDOM() { // Fonction qui récupère uniquement les name, city/country et tagline
+    // Fonction qui récupère uniquement les name, city/country et tagline
+    function getUserNameDOM() { 
 
         const userTagName = document.createElement( 'article' );
 
@@ -79,7 +84,8 @@
         return userTagName;
     }
 
-    function getUserPictureDOM() { // fonction qui récupère uniquement la photo de profil du photographe
+    // fonction qui récupère uniquement la photo de profil du photographe
+    function getUserPictureDOM() { 
         
         const imgUser = document.createElement( 'img' ); // création de la balise photo
         imgUser.setAttribute("src", picture);
@@ -93,13 +99,15 @@
 
     }    
 
+    // La Factory photographerFactory(data) retourne toutes ses données et fonctions()
+    // Ces fonctiones pourront être appelées plutard
     return {name, id, city, country, tagline, price, portrait, media, getUserCardDOM, getUserNameDOM, getUserPictureDOM}
 }
 
 function mediaFactory(data){
     const {id, photographerId, title, image, likes, date, price, urlName, video} = data;
     
-
+    // Fonction qui générera tous les articles incluant les medias de la page du photographe
     function getUserMediasDOM() {
         let articlePicture = document.createElement( 'article' );
         articlePicture.className = "article-pictures";
@@ -125,9 +133,12 @@ function mediaFactory(data){
         videoPictures.appendChild(sourceVideo);
         videoPictures.setAttribute("tabindex","6");
 
+        // Si la fonction trouve une image:
         if (image) {
+            // elle ajoute l'image dans header
             header.appendChild(imgPictures);
         } else {
+            //sinon elle ajoute la vidéo dans header
             header.appendChild(videoPictures);
         }
 
@@ -152,7 +163,10 @@ function mediaFactory(data){
         heart.className = "fa-regular fa-heart";
         heart.setAttribute('role','button');                            
         heart.setAttribute("tabindex","6");
-        heart.setAttribute("onclick","likes()");
+        heart.setAttribute("onclick","likes()"); // Ajout de la fonction likes() sur chaque photo
+
+        // Au click de l'utilisateur, le coeur se rempli ou se vide.
+        // le nombre de like de la photo augmente de +1 ou diminue de -1
         heart.addEventListener('click', () => {
             if(heart.classList.contains("fa-regular")){
                 heart.classList.replace("fa-regular", "fa-solid");
@@ -183,6 +197,8 @@ function mediaFactory(data){
 
     }
 
+    // fonction qui génère l'objet ou le nombre total de like de toutes les photos
+    // et le prix journaliers du photographe
     function getLikesNumbers() {
         let countContainer = document.createElement( 'aside');
         countContainer.className = "count-container";
@@ -195,7 +211,7 @@ function mediaFactory(data){
         let totals = 0;        
         for(let [key,value] of Object.entries(data.media))
         {
-            totals = totals + value.likes;
+            totals = totals + value.likes; // nombre le likes total
         }
         
         totalHeartNumber.innerHTML = `${totals} <em class="fa-solid fa-heart" aria-hidden="true" title="Nombre de like total de toutes les photos"></em><br/>
@@ -214,6 +230,7 @@ function mediaFactory(data){
         return countContainer;
     }   
 
+    // Fonction qui génère les médias de la lightbox
     function getLightbox(){
         let divPicture = document.createElement( 'div' );
         divPicture.className = "lightbox-picture-container";
@@ -236,9 +253,12 @@ function mediaFactory(data){
         videoPictures.appendChild(sourceVideo);
         videoPictures.setAttribute("tabindex","0");
 
+        // Si la fonction trouve une image:
         if (image) {
+            // elle ajoute l'image dans divPicture
             divPicture.appendChild(imgBox);
         } else {
+            //sinon elle ajoute la vidéo dans divPicture
             divPicture.appendChild(videoPictures);
         }
 
@@ -256,7 +276,7 @@ function mediaFactory(data){
         return articlePicture;
     }
 
-    return {id, photographerId, title, image, likes, date, price,getUserMediasDOM, getLikesNumbers, getLightbox}
+    // La Factory  mediaFactory(data) retourne toutes ses données et fonctions()
+    // Ces fonctiones pourront être appelées plutard
+    return {id, photographerId, title, image, likes, date, price, getUserMediasDOM, getLikesNumbers, getLightbox}
 }
-
-

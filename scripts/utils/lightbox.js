@@ -1,3 +1,4 @@
+// Fonction fermant la lightbox
 function closeLightbox(){
 
     const lightbox = document.getElementById('lightbox');
@@ -25,6 +26,7 @@ function closeLightbox(){
     totalPrices.setAttribute('aria-hidden', 'false');    
 }
 
+//Fonction qui ferme la lightbox en utilisant la fonciton "closeLightbox()" via le bouton "escape"
 function closeLightboxByKeydownEscape(event){
     const keycode = event.keycode ? event.keycode : event.which;  
     if(keycode===27){
@@ -32,6 +34,7 @@ function closeLightboxByKeydownEscape(event){
     }
 }
 
+// Fonction qui écoute l'action de l'utilisateur et réagit en utilisant la bonne fonction
 function closeLightboxBtn(){
     const closeBtn = document.querySelector( '.close-lightbox em' );
     closeBtn.addEventListener('click', () => {
@@ -44,6 +47,7 @@ function closeLightboxBtn(){
 }
 closeLightboxBtn();
 
+// Fonction ouvrant la lightbox
 function openLightbox(){
     const lightbox = document.querySelector('.lightbox-modal');
     const mainDOM = document.getElementById("main");
@@ -69,16 +73,17 @@ function openLightbox(){
    
 }
 
-async function displayLightbox(id){
-   
+//Fonction ouvrant la lightbox selon l'id selectionné
+async function displayLightbox(id){   
     const imageLightbox = document.getElementById("1" + id);
-    if(imageLightbox.id){
+    if(imageLightbox. id){
         imageLightbox.classList.add("active");        
         imageLightbox.setAttribute("aria-hidden","false");        
         openLightbox();
     }
 }
 
+// Fonction qui ouvre la photo précédente et ferme le reste
 function getPreviousPicture(){
     
     let allArticles = document.querySelectorAll(".lightbox-pictures-article");
@@ -100,12 +105,15 @@ function getPreviousPicture(){
     }
 }
 
+// Fonction qui ouvre la photo précédente a la pression de la flèche gauche
 function getPreviousPictureByKeydowLeft(event){
     const keycode = event.keycode ? event.keycode : event.which;  
     if(keycode === 37){
     getPreviousPicture();
   }
 }
+
+// Fonction qui ouvre la photo précédente a la pression du bouton "entrer"
 function getPreviousPictureByKeydowEnter(event){
     const keycode = event.keycode ? event.keycode : event.which;  
     if(keycode===13){
@@ -113,6 +121,7 @@ function getPreviousPictureByKeydowEnter(event){
   }
 }
 
+// Fonction qui écoute l'action de l'utilisateur et suivant son action, ouvre la photo précédente
 function previousPicture(){
     const previousBtn = document.querySelector(".left-arrow em");
     previousBtn.addEventListener('click', () => {
@@ -128,6 +137,7 @@ function previousPicture(){
 }
 previousPicture();
 
+// Fonction qui ouvre la photo suivante et ferme le reste
 function getNextPicture()
 {
     let allArticles = document.querySelectorAll(".lightbox-pictures-article");
@@ -150,12 +160,15 @@ function getNextPicture()
     }
 }
 
+// Fonction qui ouvre la photo suivante a la pression du bouton "entrer"
 function getNextPictureByKeydowEnter(event){
     const keycode = event.keycode ? event.keycode : event.which;  
     if(keycode === 13){
     getNextPicture();
   }
 }
+
+// Fonction qui ouvre la photo suivante a la pression de la flèche droite
 function getNextPictureByKeydowRigth(event){
     const keycode = event.keycode ? event.keycode : event.which;  
     if(keycode=== 39){
@@ -163,6 +176,7 @@ function getNextPictureByKeydowRigth(event){
   }
 }
 
+// Fonction qui écoute l'action de l'utilisateur et suivant son action, ouvre la photo suivante
 function nextPicture(){
     const nextBtn = document.querySelector(".right-arrow em");
     nextBtn.addEventListener('click', () => {
