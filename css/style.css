@@ -27,6 +27,10 @@ a{
     height: 50px;
     margin-left: 100px;
 }
+.logo:active {
+    transform: scale(0.95);
+    transition: ease-in 100ms;
+}
 
 .photographer_section {
     display: grid;
@@ -62,6 +66,10 @@ a{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.photographer_pictureName:hover img{
+    transform: scale(0.99);
+    transition: ease-in 100ms;
 }
 
 .photographer_country{

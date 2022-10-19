@@ -66,6 +66,10 @@
     height: 300px;
     margin-bottom: 10px;
 }
+.picture-container:hover {
+    transform: scale(0.99);
+    transition: ease-in-out 100ms;
+}
 
 .article-pictures img, .article-pictures video {
     width: 100%;
@@ -114,13 +118,6 @@
 
 .footer-pictures div em:hover{
     transform: scale(1.1);
-}
-
-.heart{
-    animation-name: heart;
-    transform: scaleX(1);
-    animation-duration: 3000ms;
-    transition: heart 3000ms;
 }
 
 .screenreader-text{
@@ -194,6 +191,14 @@
     align-items: baseline;
     height: inherit;
     margin-bottom: 19px;
+}
+.header-contact a:hover{
+    transform: scale(1.04);
+    transition: ease-in 100ms;
+}
+.header-contact a:active{
+    transform: scale(0.98);
+    transition: ease-in 100ms;
 }
 
 .modal header img {
@@ -274,6 +279,14 @@ form textarea {
     border-radius: 5px;
     cursor: pointer;
 }
+.contact_button:hover {
+    transform: scale(1.01);
+    transition: ease-in 100ms;
+}
+.contact_button:active {
+    transform: scale(0.95);
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 100ms;
+}
 
 .textError{
     font-family: 'DM Sans';
@@ -316,9 +329,17 @@ form textarea {
 .left-arrow{
     margin-left:3%;
 }
+.left-arrow:hover{
+    transform: scale(1.05);
+    transition: transform ease-in 100ms;
+}
+.left-arrow:active{
+    transform: scale(0.95);
+    transition: transform ease-in 100ms;
+}
 
 .left-arrow em{
-    transform: rotate(0deg);
+    transform: rotate(-90deg);
     font-size: 48px;    
     color: #911C1C;
     cursor: pointer;
@@ -326,6 +347,14 @@ form textarea {
 
 .right-arrow{
     margin-right: 4%;
+}
+.right-arrow:hover{
+    transform: scale(1.05);
+    transition: transform ease-in 100ms;
+}
+.right-arrow:active{
+    transform: scale(0.95);
+    transition: transform ease-in 100ms;
 }
 .right-arrow em{
     transform: rotate(90deg);
@@ -369,6 +398,14 @@ form textarea {
     position: absolute;
     right: 5%;
     top: 0;
+}
+.close-lightbox:hover{
+    transform: scale(1.05);
+    transition: transform ease-in 100ms;
+}
+.close-lightbox:active{
+    transform: scale(0.95);
+    transition: transform ease-in 100ms;
 }
 
 .close-lightbox em{
