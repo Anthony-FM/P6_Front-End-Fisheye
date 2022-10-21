@@ -60,7 +60,7 @@ closeModaleEvent();
 
 // RegExp pour les erreurs
 //==================================================================
-const nameRegex = /^([a-zA-Zéèîïêë]{2,})+$/g; // RegExp pour les Prénoms et Noms
+const nameRegex = /^([a-zA-Zéèîïêë]{2,})+[\s-]?([a-zA-Zéèîïêë]{2,})$/g; // RegExp pour les Prénoms et Noms
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g; // RegExp pour les adresses emails
 //===================================================================
 
