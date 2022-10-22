@@ -2,9 +2,7 @@
 // Récupération de l'ID dans l'URL
 async function getUrlID() {
     let params = (new URL(document.location)).searchParams;
-    // console.log(params);
     let id = parseInt(params.get('id'));
-    // console.log(id);
     return id;
 }
 
@@ -92,6 +90,9 @@ async function init() {
     await displayMedias(thePhotographer);
     await createAllLikes(thePhotographer);    
     await createLightboxContent(thePhotographer);
+    opencLightboxWithButton();
+    await upOrDownLike();
+    
 };
 
 // Lancement de la fonction init()

@@ -8,7 +8,6 @@ function closeLightbox(){
     const articleActive = document.querySelector('.active');
     
     if(articleActive.classList.contains("active")){
-
         articleActive.classList.remove("active");
     }
 
@@ -18,6 +17,8 @@ function closeLightbox(){
     
     mainDOM.style.opacity = "1";
     mainDOM.setAttribute('aria-hidden', 'false');
+    mainDOM.setAttribute('aria-current','page')
+    mainDOM.focus();        
     
     headerDOM.style.opacity = "1";
     headerDOM.setAttribute('aria-hidden', 'false');
@@ -29,7 +30,14 @@ function closeLightbox(){
 //Fonction qui ferme la lightbox en utilisant la fonciton "closeLightbox()" via le bouton "escape"
 function closeLightboxByKeydownEscape(event){
     const keycode = event.keycode ? event.keycode : event.which;  
-    if(keycode===27){
+    if(keycode===27 ){
+        closeLightbox();
+    }
+}
+//Fonction qui ferme la lightbox en utilisant la fonciton "closeLightbox()" via le bouton "entrer ou espace"
+function closeLightboxByKeydown(event){
+    const keycode = event.keycode ? event.keycode : event.which;  
+    if(keycode === 13 || keycode === 32){
         closeLightbox();
     }
 }
@@ -39,6 +47,9 @@ function closeLightboxBtn(){
     const closeBtn = document.querySelector( '.close-lightbox em' );
     closeBtn.addEventListener('click', () => {
         closeLightbox();
+    })
+    closeBtn.addEventListener('keydown', (event) => {
+        closeLightboxByKeydown(event);
     })
     const lightbox = document.getElementById('lightbox');
     lightbox.addEventListener('keydown', (event) => {
@@ -74,14 +85,30 @@ function openLightbox(){
 }
 
 //Fonction ouvrant la lightbox selon l'id selectionné
-async function displayLightbox(id){   
+function displayLightbox(id){   
+    console.log(id);
     const imageLightbox = document.getElementById("1" + id);
     if(imageLightbox. id){
         imageLightbox.classList.add("active");        
         imageLightbox.setAttribute("aria-hidden","false");        
         openLightbox();
-    }
+    } 
 }
+
+//Fonction ouvrant la lightbox avec les Keycode "entrer" et "espace"
+function opencLightboxWithButton() {
+    const imagesForLightbox = document.querySelectorAll(".picture-container img, .picture-container video");
+    for(i=0; i<imagesForLightbox.length; i++){
+        const id = imagesForLightbox[i].id;
+        imagesForLightbox[i].addEventListener('keydown', (event) => {            
+            const keyCode = event.keycode ? event.keycode : event.which;
+            if(keyCode === 13 || keyCode === 32){
+                displayLightbox(id);
+            } 
+        })
+    }    
+}
+
 
 // Fonction qui ouvre la photo précédente et ferme le reste
 function getPreviousPicture(){

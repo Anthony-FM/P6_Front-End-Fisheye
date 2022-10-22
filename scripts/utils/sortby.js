@@ -203,12 +203,15 @@ function initSort() {
 
     populariteBtn.addEventListener('click', selectPopulariteSort);
     populariteBtn.addEventListener('keyup', actionButtonKeyupHandlerPopularite);
+    populariteBtn.addEventListener('keydown', actionButtonKeyupHandlerPopularite);
     
     dateBtn.addEventListener('click', selectDateSort);
     dateBtn.addEventListener('keyup', actionButtonKeyupHandlerDate);
+    dateBtn.addEventListener('keydown', actionButtonKeyupHandlerDate);
     
     titleBtn.addEventListener('click', selectTitleSort);
     titleBtn.addEventListener('keyup', actionButtonKeyupHandlerTitle);
+    titleBtn.addEventListener('keydown', actionButtonKeyupHandlerTitle);
 
 }
 initSort();

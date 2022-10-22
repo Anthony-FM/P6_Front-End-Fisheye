@@ -165,30 +165,12 @@ function mediaFactory(data){
         heart.className = "fa-regular fa-heart";
         heart.setAttribute('role','button');                            
         heart.setAttribute("tabindex","6");
-        heart.setAttribute("onclick","likes()"); // Ajout de la fonction likes() sur chaque photo
+        // Ajout de la fonction likes() sur chaque photo
+        // heart.setAttribute("onclick","likes()"); 
 
-        // Au click de l'utilisateur, le coeur se rempli ou se vide.
-        // le nombre de like de la photo augmente de +1 ou diminue de -1
-        heart.addEventListener('click', () => {
-            if(heart.classList.contains("fa-regular")){
-                heart.classList.replace("fa-regular", "fa-solid");
-                heart.classList.add("heart");
-                heart.setAttribute('aria-label', `La photo a ${likes + 1} likes . Cliquez pour ajouter ou retirer un like`);
-                heartNumber.textContent = "";
-                heartNumber.textContent = likes + 1;
-            } else {
-                heart.classList.replace("fa-solid", "fa-regular");
-                heart.classList.remove("heart");
-                heartNumber.textContent = "";
-                heartNumber.textContent = likes;
-                heart.setAttribute('aria-label', `La photo a ${likes} likes . Cliquez pour ajouter ou retirer un like`);
-            }
-                
-        })
-
+        
         heart.setAttribute('aria-hidden','false');
         heart.setAttribute("title", "likes");
-        
 
         heartNumberContainer.appendChild(heartNumber);
         heartNumberContainer.appendChild(heart);
