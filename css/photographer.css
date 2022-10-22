@@ -48,7 +48,7 @@
 
 .user-pictures {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1.3fr 1.3fr 1fr;
     grid-gap: 30px;
     margin: 0 100px 90px;
     align-items: baseline;
