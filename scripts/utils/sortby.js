@@ -27,6 +27,7 @@ async function createSortByPopularity(){
     await displayMedias(reordonatePicturesDataByPopularity);
     await createLightboxContent(reordonatePicturesDataByPopularity);
     await createAllLikes(reordonatePicturesDataByPopularity);
+    await upOrDownLike();
 }
 
 // Fonction qui ouvre le modal de trie ou selectionne le trie par popularité
@@ -94,6 +95,7 @@ async function createSortBydate(){
     await displayMedias(reordonatePicturesDataByDate);
     await createLightboxContent(reordonatePicturesDataByDate);
     await createAllLikes(reordonatePicturesDataByDate);
+    await upOrDownLike();
 }
 
 // Fonction qui ouvre le modal de trie ou selectionne le trie par date de création
@@ -129,9 +131,10 @@ function selectDateSort(event) {
     }
 }
 
-// Fonction qui enclenche la fonction "selectPopulariteSort(event)" grâce a la pression des bouton "espace" et "entrer"
+// Fonction qui enclenche la fonction "selectDateSort(event)" grâce a la pression des bouton "espace" et "entrer"
 function actionButtonKeyupHandlerDate(event) {
-    if (event.keyCode === 13 || event.keyCode === 32) {        
+    const keyCode = event.keycode ? event.keycode : event.which; 
+    if (keyCode === 13 || keyCode === 32) {        
         selectDateSort(event);
     }
 }
@@ -153,6 +156,7 @@ async function createSortBytitle(){
     await displayMedias(reordonatePicturesDataByTitle);
     await createLightboxContent(reordonatePicturesDataByTitle);
     await createAllLikes(reordonatePicturesDataByTitle);
+    await upOrDownLike();
 }
 
 
@@ -191,9 +195,10 @@ function selectTitleSort(event) {
    
 }
 
-// Fonction qui enclenche la fonction "selectPopulariteSort(event)" grâce a la pression des bouton "espace" et "entrer"
+// Fonction qui enclenche la fonction "selectTitleSort(event)" grâce a la pression des bouton "espace" et "entrer"
 function actionButtonKeyupHandlerTitle(event) {
-    if (event.keyCode === 13 || event.keyCode === 32) {        
+    const keyCode = event.keycode ? event.keycode : event.which;
+    if (keyCode === 13 || keyCode === 32) {        
         selectTitleSort(event);
     }
 }
