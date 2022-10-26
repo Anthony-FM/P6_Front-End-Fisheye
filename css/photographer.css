@@ -279,9 +279,11 @@ form textarea {
     border-radius: 5px;
     cursor: pointer;
 }
-.contact_button:hover {
+.contact_button:hover  {
     transform: scale(1.01);
     transition: ease-in 100ms;
+    background-color: #DB8876;
+    color: #000000;
 }
 .contact_button:active {
     transform: scale(0.95);
