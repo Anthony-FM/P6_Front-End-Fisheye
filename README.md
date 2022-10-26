@@ -1,12 +1,32 @@
-# Base de code du projet P6 - Parcours Front-end
-## Démarrer le projet
-Rien à installer ici, il suffit d'ouvrir le fichier `index.html`.
+# Projet N°6 Front-end => Vanilla Javascript -Fisheye- #
+Objectif: Refonte du site statique Fisheye en site dynamique:
+- Utilisation des dernières versions moderne de Javascript
+- Un site Acessible à tous
+- Remplir la page photographer.html dynamiquement pour chaque photographe
+- Gérer une lightbox fonctionnel et accessible
+- Créer une modale de contact fonctionnel et accessible
+- Créer une modale de trie des photos
+- Gérer un système de like pour chaque photo et pour toute les photos.
 
-### Mon Projet N°6 Front-end Vanilla Javascript ###
+## Base de code du projet P6 
+* Deux Fichiers html (index.html et photographer.html) presque vide
+* une base de travail de fichier js:
+- un dossier factories contenant un fichier photographer.js avec une dizaine de ligne de code
+- un dossier pages contenant deux fichiers js => index et photographer
+- un dossier utils contenant un fichier js => contactForm
+* Un dossier contenant le fichier JSON photographers (notre base de donnée)
+
+## Contrainte technique
+- Le code est séparé en différents fichiers (HTML, CSS, JavaScript)
+- Utilisation de ESLint
+- Utilisation des versions moderne de Javascript
+- Code est lisible. 
+- Variables et fonctions ont un nom qui ont un sens
+- Commenter le code 
 
 ### Parcour: Dèveloppeur d'application Javascript - React ###
 
 Voici la page du projet. Bon visionnage!! :blush:
 
-:computer: https://anthony-fm.github.io/P6_Front-End-Fisheye/ :computer:
+:computer: GitHub Pages: https://anthony-fm.github.io/P6_Front-End-Fisheye/ :computer:
 
