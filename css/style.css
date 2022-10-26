@@ -162,10 +162,6 @@ a{
 
 }
 
-.btn-sort:focus {
-    border: 2px white solid;
-}
-
 .sort-container em {
     position: absolute;
     right: 0;
