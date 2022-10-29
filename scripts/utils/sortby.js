@@ -15,14 +15,16 @@ async function createSortByPopularity(){
     const id = await getUrlID();
     const thePhotographer = await getPhotographer(id);  
 	const reordonatePicturesByPopularity = Array.from(thePhotographer.media);
+    console.log(reordonatePicturesByPopularity)
 	reordonatePicturesByPopularity.sort(function (a, b) {
-		// B - A (et pas A - B) <= décroissant
+        // B - A (et pas A - B) <= décroissant
 		return b.likes - a.likes;
 	});
+    console.log(reordonatePicturesByPopularity)
     const media = reordonatePicturesByPopularity;
     const reordonatePicturesDataByPopularity = {...thePhotographer, media};
     document.querySelector(".user-pictures").innerHTML="";
-    document.querySelector(".lightbox-pictures").innerHTML="";
+    document.querySelector(".lightbox-pictures-aside").innerHTML="";
     // On génère a nouveau les medias en fonction de "reordonatePicturesDataByPopularity"
     await displayMedias(reordonatePicturesDataByPopularity);
     await createLightboxContent(reordonatePicturesDataByPopularity);
@@ -101,7 +103,7 @@ async function createSortBydate(){
     const media = reordonatePicturesByDate;
     const reordonatePicturesDataByDate = {...thePhotographer, media};
     document.querySelector(".user-pictures").innerHTML="";
-    document.querySelector(".lightbox-pictures").innerHTML="";
+    document.querySelector(".lightbox-pictures-aside").innerHTML="";
     // On génère a nouveau les medias en fonction de "reordonatePicturesDataByDate"
     await displayMedias(reordonatePicturesDataByDate);
     await createLightboxContent(reordonatePicturesDataByDate);
@@ -173,7 +175,7 @@ async function createSortBytitle(){
     const media = reordonatePicturesByTitle;
     const reordonatePicturesDataByTitle = {...thePhotographer, media};
     document.querySelector(".user-pictures").innerHTML="";
-    document.querySelector(".lightbox-pictures").innerHTML="";
+    document.querySelector(".lightbox-pictures-aside").innerHTML="";
     // On génère a nouveau les medias en fonction de "reordonatePicturesDataByTitle"
     await displayMedias(reordonatePicturesDataByTitle);
     await createLightboxContent(reordonatePicturesDataByTitle);

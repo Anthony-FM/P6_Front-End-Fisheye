@@ -65,7 +65,7 @@ async function createAllLikes(data){
 // Fonction recupérant chaque objet de la lightbox 
 async function createLightboxContent(data){
     
-    const leftArrow = document.querySelector('.lightbox-pictures-aside');
+    const asideContainer = document.querySelector('.lightbox-pictures-aside');
     
     data.media.forEach((media) => { // pour chaque média
         // création d'un lien unique a intégré dans l'objet media
@@ -76,7 +76,7 @@ async function createLightboxContent(data){
         // récupération de l'objet via la fonction de la factory getLightboxMedias()
         const articleImage = imageData.getLightboxMedias(); 
         // console.log(articleImage);
-        leftArrow.appendChild(articleImage);
+        asideContainer.appendChild(articleImage);
     })
 
 }
