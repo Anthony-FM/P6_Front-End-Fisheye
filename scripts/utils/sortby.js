@@ -55,7 +55,6 @@ async function selectPopulariteSort(event) {
         date.classList.remove("hidden-sort"); 
         title.classList.remove("hidden-sort"); 
         btnContainer.setAttribute("aria-expanded","true");
-        btnContainer.setAttribute("aria-pressed","false");
         
         
     } else {
@@ -74,7 +73,6 @@ async function selectPopulariteSort(event) {
         popularite.setAttribute("aria-selected","true");
         popularite.setAttribute("aria-activedescendant","");
         btnContainer.setAttribute("aria-expanded","false");
-        btnContainer.setAttribute("aria-pressed","true");
               
         await createSortByPopularity();
     } 
@@ -133,8 +131,7 @@ function selectDateSort(event) {
         title.style.borderBottom = "none";
         popularite.classList.remove("hidden-sort"); 
         title.classList.remove("hidden-sort");   
-        btnContainer.setAttribute("aria-expanded","true");    
-        btnContainer.setAttribute("aria-pressed","false");    
+        btnContainer.setAttribute("aria-expanded","true");   
         
     } else {
         let arrowPop = document.querySelector("#sortPopularite .fa-chevron-down");
@@ -151,7 +148,6 @@ function selectDateSort(event) {
         date.setAttribute("aria-selected","");
         date.setAttribute("aria-activedescendant","");
         btnContainer.setAttribute("aria-expanded","false");
-        btnContainer.setAttribute("aria-pressed","true");
         createSortBydate();
               
     }
@@ -211,7 +207,6 @@ function selectTitleSort(event) {
         title.removeAttribute("aria-selected","");
         title.removeAttribute("aria-activedescendant","");
         btnContainer.setAttribute("aria-expanded","true");
-        btnContainer.setAttribute("aria-pressed","false");
         
     }  else {
         let arrowPop = document.querySelector("#sortPopularite .fa-chevron-down");
@@ -228,7 +223,6 @@ function selectTitleSort(event) {
         title.setAttribute("aria-selected","");
         title.setAttribute("aria-activedescendant","");
         btnContainer.setAttribute("aria-expanded","false"); 
-        btnContainer.setAttribute("aria-pressed","true"); 
         createSortBytitle();
     } 
    
