@@ -65,7 +65,7 @@ async function createAllLikes(data){
 // Fonction recupérant chaque objet de la lightbox 
 async function createLightboxContent(data){
     
-    const leftArrow = document.querySelector('.lightbox-pictures');
+    const leftArrow = document.querySelector('.lightbox-pictures-aside');
     
     data.media.forEach((media) => { // pour chaque média
         // création d'un lien unique a intégré dans l'objet media
