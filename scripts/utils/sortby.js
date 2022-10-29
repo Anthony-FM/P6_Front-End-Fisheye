@@ -27,7 +27,8 @@ async function createSortByPopularity(){
     await displayMedias(reordonatePicturesDataByPopularity);
     await createLightboxContent(reordonatePicturesDataByPopularity);
     await createAllLikes(reordonatePicturesDataByPopularity);
-    await upOrDownLike();
+    await upOrDownLike(reordonatePicturesDataByPopularity);
+    opencLightboxWithButton()
 }
 
 // Fonction qui ouvre le modal de trie ou selectionne le trie par popularité
@@ -37,12 +38,18 @@ async function selectPopulariteSort(event) {
     
     event.stopPropagation();
     if((popularite.classList.contains("hidden-sort")) || (date.classList.contains("hidden-sort")) || (title.classList.contains("hidden-sort"))){
-        let arrow = document.querySelector("#sortPopularite .fa-chevron-down");
-        arrow.style.display = "none";
+        let arrowPop = document.querySelector("#sortPopularite .fa-chevron-down");
+        let arrowDat = document.querySelector("#sortDate .fa-chevron-down");
+        let arrowTit = document.querySelector("#sortTitle .fa-chevron-down");
+        arrowPop.style.display = "block";
+        arrowPop.style.transform = "rotate(180deg)";
+        arrowPop.style.transition = "transform ease-in-out 100ms";
+        arrowDat.style.display = "none";
+        arrowTit.style.display = "none";
         popularite.classList.remove("hidden-sort");
         popularite.style.borderBottom = "#FFFFFF 1px solid";
         popularite.removeAttribute("aria-selected","");
-        popularite.removeAttribute("aria-activedescendant","Popularite");
+        popularite.removeAttribute("aria-activedescendant","");
         date.style.borderBottom = "#FFFFFF 1px solid";
         title.style.borderBottom = "none";
         date.classList.remove("hidden-sort"); 
@@ -53,13 +60,19 @@ async function selectPopulariteSort(event) {
         
     } else {
         
-        let arrow = document.querySelector("#sortPopularite .fa-chevron-down");
-        arrow.style.display = "block"; 
+        let arrowPop = document.querySelector("#sortPopularite .fa-chevron-down");
+        let arrowDat = document.querySelector("#sortDate .fa-chevron-down");
+        let arrowTit = document.querySelector("#sortTitle .fa-chevron-down");
+        arrowPop.style.display = "block";
+        arrowPop.style.transform = "rotate(0deg)";
+        arrowPop.style.transition = "transform ease-in-out 100ms";
+        arrowDat.style.display = "none";
+        arrowTit.style.display = "none";
         date.classList.add("hidden-sort");
         title.classList.add("hidden-sort");
         popularite.style.borderBottom = "none";
-        popularite.setAttribute("aria-selected","");
-        popularite.setAttribute("aria-activedescendant","Popularite");
+        popularite.setAttribute("aria-selected","true");
+        popularite.setAttribute("aria-activedescendant","");
         btnContainer.setAttribute("aria-expanded","false");
         btnContainer.setAttribute("aria-pressed","true");
               
@@ -95,7 +108,8 @@ async function createSortBydate(){
     await displayMedias(reordonatePicturesDataByDate);
     await createLightboxContent(reordonatePicturesDataByDate);
     await createAllLikes(reordonatePicturesDataByDate);
-    await upOrDownLike();
+    await upOrDownLike(reordonatePicturesDataByDate);
+    opencLightboxWithButton()
 }
 
 // Fonction qui ouvre le modal de trie ou selectionne le trie par date de création
@@ -104,8 +118,14 @@ function selectDateSort(event) {
    
     event.stopPropagation();
     if((popularite.classList.contains("hidden-sort")) || (date.classList.contains("hidden-sort")) || (title.classList.contains("hidden-sort"))){
-        let arrow = document.querySelector("#sortDate .fa-chevron-down");
-        arrow.style.display = "none";
+        let arrowPop = document.querySelector("#sortPopularite .fa-chevron-down");
+        let arrowDat = document.querySelector("#sortDate .fa-chevron-down");
+        let arrowTit = document.querySelector("#sortTitle .fa-chevron-down");
+        arrowPop.style.display = "none";
+        arrowDat.style.display = "block";
+        arrowDat.style.transform = "rotate(180deg)";
+        arrowDat.style.transition = "transform ease-in-out 100ms";
+        arrowTit.style.display = "none";
         date.style.borderBottom = "#FFFFFF 1px solid";
         date.removeAttribute("aria-selected","");
         date.removeAttribute("aria-activedescendant","");
@@ -117,8 +137,14 @@ function selectDateSort(event) {
         btnContainer.setAttribute("aria-pressed","false");    
         
     } else {
-        let arrow = document.querySelector("#sortDate .fa-chevron-down");
-        arrow.style.display = "block"; 
+        let arrowPop = document.querySelector("#sortPopularite .fa-chevron-down");
+        let arrowDat = document.querySelector("#sortDate .fa-chevron-down");
+        let arrowTit = document.querySelector("#sortTitle .fa-chevron-down");
+        arrowPop.style.display = "none";
+        arrowDat.style.display = "block";
+        arrowDat.style.transform = "rotate(0deg)";
+        arrowDat.style.transition = "transform ease-in-out 100ms";
+        arrowTit.style.display = "none"; 
         popularite.classList.add("hidden-sort");
         title.classList.add("hidden-sort");
         date.style.borderBottom = "none";
@@ -156,7 +182,8 @@ async function createSortBytitle(){
     await displayMedias(reordonatePicturesDataByTitle);
     await createLightboxContent(reordonatePicturesDataByTitle);
     await createAllLikes(reordonatePicturesDataByTitle);
-    await upOrDownLike();
+    await upOrDownLike(reordonatePicturesDataByTitle);
+    opencLightboxWithButton()
 }
 
 
@@ -170,8 +197,14 @@ function selectTitleSort(event) {
         
         popularite.classList.remove("hidden-sort"); 
         date.classList.remove("hidden-sort");
-        let arrow = document.querySelector("#sortTitle .fa-chevron-down");
-        arrow.style.display = "none";
+        let arrowPop = document.querySelector("#sortPopularite .fa-chevron-down");
+        let arrowDat = document.querySelector("#sortDate .fa-chevron-down");
+        let arrowTit = document.querySelector("#sortTitle .fa-chevron-down");
+        arrowPop.style.display = "none";
+        arrowDat.style.display = "none";
+        arrowTit.style.display = "block";
+        arrowTit.style.transform = "rotate(180deg)";
+        arrowTit.style.transition = "transform ease-in-out 100ms";
         date.style.borderBottom = "#FFFFFF 1px solid";
         popularite.style.borderBottom = "#FFFFFF 1px solid";
         title.style.borderBottom = "none";
@@ -181,9 +214,15 @@ function selectTitleSort(event) {
         btnContainer.setAttribute("aria-pressed","false");
         
     }  else {
-        let arrow = document.querySelector("#sortTitle .fa-chevron-down");
-        arrow.style.display = "block"; 
-        arrow.style.color = "white";
+        let arrowPop = document.querySelector("#sortPopularite .fa-chevron-down");
+        let arrowDat = document.querySelector("#sortDate .fa-chevron-down");
+        let arrowTit = document.querySelector("#sortTitle .fa-chevron-down");
+        arrowPop.style.display = "none";
+        arrowDat.style.display = "none";
+        arrowTit.style.display = "block";
+        arrowTit.style.transform = "rotate(0deg)";
+        arrowTit.style.transition = "transform ease-in-out 100ms";
+        arrowTit.style.color = "white";
         popularite.classList.add("hidden-sort");
         date.classList.add("hidden-sort");
         title.setAttribute("aria-selected","");

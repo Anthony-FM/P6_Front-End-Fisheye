@@ -91,7 +91,7 @@ async function init() {
     await createAllLikes(thePhotographer);    
     await createLightboxContent(thePhotographer);
     opencLightboxWithButton();
-    await upOrDownLike();
+    await upOrDownLike(thePhotographer);
     
 };
 

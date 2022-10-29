@@ -105,7 +105,7 @@ function photographerFactory(data) {
 }
 
 function mediaFactory(data){
-    const {id, photographerId, title, image, likes, date, price, urlName, video} = data;
+    const {id, photographerId, title, image, likes, date, price, urlName, media} = data;
     
     // Fonction qui générera tous les articles incluant les medias de la page du photographe
     function getUserMediasDOM() {
@@ -117,13 +117,12 @@ function mediaFactory(data){
 
         let imgPictures = document.createElement( 'img' );
         imgPictures.setAttribute("src", `${urlName}`);
-        imgPictures.setAttribute("alt", title );
+        imgPictures.setAttribute("alt", "Photo de "+title );
         imgPictures.setAttribute('id', id);
         imgPictures.setAttribute('onclick', "displayLightbox(id)");
         imgPictures.setAttribute("tabindex","6");
 
         let videoPictures = document.createElement( 'video' );
-        // videoPictures.setAttribute("controls","");
         videoPictures.setAttribute("id", id);
         videoPictures.setAttribute('onclick', "displayLightbox(id)");
         videoPictures.setAttribute("title", "Video de" + title );
@@ -159,18 +158,15 @@ function mediaFactory(data){
         let heartNumber = document.createElement( 'p' );
         heartNumber.className = "heart-number";
         heartNumber.textContent = likes;
+        heartNumber.setAttribute("title","Cette photo a "+ likes + " likes");
         heartNumber.setAttribute("tabindex","6");
 
         let heart = document.createElement( 'em' );
         heart.className = "fa-regular fa-heart";
         heart.setAttribute('role','button');                            
-        heart.setAttribute("tabindex","6");
-        // Ajout de la fonction likes() sur chaque photo
-        // heart.setAttribute("onclick","likes()"); 
-
-        
+        heart.setAttribute("tabindex","6");        
         heart.setAttribute('aria-hidden','false');
-        heart.setAttribute("title", "likes");
+        heart.setAttribute("title", "Cliquez pour ajouter ou retirer un likes");
 
         heartNumberContainer.appendChild(heartNumber);
         heartNumberContainer.appendChild(heart);
@@ -183,9 +179,19 @@ function mediaFactory(data){
 
     }
 
+    function getTotalLikes(){
+        let totals = 0;     
+        for(i=0; i< media.length; i++){
+            totals = totals + media[i].likes;
+           
+        } 
+        return totals;
+    }
+
     // fonction qui génère l'objet ou le nombre total de like de toutes les photos
     // et le prix journaliers du photographe
     function getLikesNumbers() {
+        let totals = getTotalLikes();
         let countContainer = document.createElement( 'aside');
         countContainer.className = "count-container";
         countContainer.setAttribute('aria-label', 'Nombre de likes total et Prix journalier du photographe');
@@ -193,12 +199,6 @@ function mediaFactory(data){
 
         let totalHeartNumber = document.createElement( 'p' );
         totalHeartNumber.className = "hearts-number";
-        
-        let totals = 0;        
-        for(let [key,value] of Object.entries(data.media))
-        {
-            totals = totals + value.likes; // nombre le likes total
-        }
         
         totalHeartNumber.innerHTML = `${totals} <em class="fa-solid fa-heart" aria-hidden="true" title="Nombre de like total de toutes les photos"></em><br/>
         <span class="screenreader-text">Nombre de like pour ce photographe  </span>`;
@@ -264,5 +264,5 @@ function mediaFactory(data){
 
     // La Factory  mediaFactory(data) retourne toutes ses données et fonctions()
     // Ces fonctiones pourront être appelées plutard
-    return {id, photographerId, title, image, likes, date, price, getUserMediasDOM, getLikesNumbers, getLightboxMedias}
+    return {id, photographerId, title, image, likes, date, price, getUserMediasDOM, getTotalLikes, getLikesNumbers, getLightboxMedias}
 }
