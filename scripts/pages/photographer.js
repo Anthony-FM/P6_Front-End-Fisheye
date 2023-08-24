@@ -40,15 +40,20 @@ async function createId(data) {
 
 // Fonction récupérant les objets des medias du photographe
 async function displayMedias(data) {    
-    
     const photographerPicture = document.getElementById('user-pictures'); 
+    let dataImgs = data.media.filter((el) =>  el.image)
+    let dataVideos = data.media.filter((el) =>  el.video)
+
+    const imagesFromData = dataImgs.map((dataImg) => new MediaFactory(dataImg, data.name, 'image'))
+    const videoFromData = dataVideos.map((dataVideo) => new MediaFactory(dataVideo, data.name, 'video'))
     
-    data.media.forEach((media) => {
-        // Création d'un lien unique pour chaque média
-        let urlName = `./assets/${data.name}/` + (media.image ? media.image : media.video);
-        // Ajouter le lien dans l'objet media
-        let medias = { ...media, urlName}
-        const pictureDOM = mediaFactory(medias); // utilisation de la Factory Media
+    const fullMedias = imagesFromData.concat(videoFromData)
+    fullMedias.forEach((media) => {
+        // // Création d'un lien unique pour chaque média
+        // let urlName = `./assets/${data.name}/` + (media.image ? media.image : media.video);
+        // // Ajouter le lien dans l'objet media
+        // let medias = { ...media, urlName}
+        const pictureDOM = mediaFactory(media); // utilisation de la Factory Media
         const pictureArticle = pictureDOM.getUserMediasDOM();
         photographerPicture.appendChild(pictureArticle);
     })
@@ -75,7 +80,6 @@ async function createLightboxContent(data){
 
         // récupération de l'objet via la fonction de la factory getLightboxMedias()
         const articleImage = imageData.getLightboxMedias(); 
-        // console.log(articleImage);
         asideContainer.appendChild(articleImage);
     })
 
