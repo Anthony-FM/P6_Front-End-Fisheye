@@ -378,6 +378,7 @@ form textarea {
 .lightbox-pictures-article{
     height: 96%;
     flex-direction: column;
+    justify-content: center;
     display: none;
 }
 
