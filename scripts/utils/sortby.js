@@ -15,12 +15,10 @@ async function createSortByPopularity(){
     const id = await getUrlID();
     const thePhotographer = await getPhotographer(id);  
 	const reordonatePicturesByPopularity = Array.from(thePhotographer.media);
-    console.log(reordonatePicturesByPopularity)
 	reordonatePicturesByPopularity.sort(function (a, b) {
         // B - A (et pas A - B) <= décroissant
 		return b.likes - a.likes;
 	});
-    console.log(reordonatePicturesByPopularity)
     const media = reordonatePicturesByPopularity;
     const reordonatePicturesDataByPopularity = {...thePhotographer, media};
     document.querySelector(".user-pictures").innerHTML="";
@@ -94,7 +92,6 @@ async function createSortBydate(){
     const id = await getUrlID();
     const thePhotographer = await getPhotographer(id); 
 	const reordonatePicturesByDate = Array.from(thePhotographer.media);
-    // console.log(reordonatePicturesByDate)
 	reordonatePicturesByDate.sort(function (a, b) {
 		//  A - B <= croissant
         // Date.parse permet de transformer la date en un nombre
@@ -108,7 +105,7 @@ async function createSortBydate(){
     await displayMedias(reordonatePicturesDataByDate);
     await createLightboxContent(reordonatePicturesDataByDate);
     await createAllLikes(reordonatePicturesDataByDate);
-    await upOrDownLike(reordonatePicturesDataByDate);
+    upOrDownLike(reordonatePicturesDataByDate);
     opencLightboxWithButton()
 }
 

@@ -1,7 +1,6 @@
 // Fonction permettant de basculer d'un coeur vide a un coeur plein
 // tout en ajoutant ou soustrayant la valeur total de like sur la photo
-async function likesUpLikesDown(data, keyArray){  
-    console.log(data)  
+function likesUpLikesDown(data, keyArray){  
     const media = data.media;
     const heart = document.querySelectorAll(".heart-container em");
     const heartNumber = document.querySelectorAll(".heart-number");
@@ -35,7 +34,7 @@ function likesUpLikesDownByKeydown(event, keyArray){
 
 // Au click de l'utilisateur, le coeur se rempli ou se vide.
 // le nombre de like de la photo augmente de +1 ou diminue de -1
-async function upOrDownLike(data) {    
+function upOrDownLike(data) {    
     const heart = document.querySelectorAll(".heart-container em");
     for(i=0; i<heart.length; i++){
         let keyArray = i;

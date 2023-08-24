@@ -86,7 +86,6 @@ function openLightbox(){
 
 //Fonction ouvrant la lightbox selon l'id selectionné
 function displayLightbox(id){   
-    console.log(id);
     const imageLightbox = document.getElementById("1" + id);
     if(imageLightbox. id){
         imageLightbox.classList.add("active");        
@@ -123,8 +122,6 @@ function getPreviousPicture(){
         } else if (allArticles[i].classList.contains("active") && i == 0){
             allArticles[i].classList.remove("active");
             allArticles[i].setAttribute("aria-hidden","true");
-            console.log(allArticles.length)
-            console.log(allArticles[i])
             allArticles[allArticles.length - 1].classList.add("active");
             allArticles[allArticles.length - 1].setAttribute("aria-hidden","false");
 
@@ -175,11 +172,9 @@ function getNextPicture()
             allArticles[i].setAttribute("aria-hidden","true");
             allArticles[i+1].classList.add("active");
             allArticles[i+1].setAttribute("aria-hidden","false");
-            console.log(allArticles[i])
         } else if (allArticles[i].classList.contains("active") && i == allArticles.length - 1){
             allArticles[i].classList.remove("active");
             allArticles[i].setAttribute("aria-hidden","true");
-            console.log("blabla" + allArticles[0])
             allArticles[i=0].classList.add("active");
             allArticles[i=0].setAttribute("aria-hidden","false");
 

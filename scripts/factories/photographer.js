@@ -3,7 +3,6 @@
 // Elle crée des objets sur les information du photographe
 function photographerFactory(data) {
     const { name, id, city, country, tagline, price, portrait, ...media} = data;  // récupération des données via "data"
-    // console.log({name,city,country,portrait, tagline, price});
 
     const picture = `assets/Photographers_ID_Photos/${portrait}`; // ajout dans la constante "picture" le lien vers le dossier des photos
 
@@ -133,7 +132,6 @@ function mediaFactory(data){
         sourceVideo.setAttribute("poster", "placeholder.png");
         videoPictures.appendChild(sourceVideo);
         videoPictures.setAttribute("tabindex","6");
-
         // Si la fonction trouve une image:
         if (image) {
             // elle ajoute l'image dans header
