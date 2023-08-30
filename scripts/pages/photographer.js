@@ -41,13 +41,11 @@ async function createId(data) {
 async function getPictureAndVideoData(data){
     let dataImgs = data.media.filter((el) =>  el.image)
     let dataVideos = data.media.filter((el) =>  el.video)
-    console.log(data.price)
 
     const imagesFromData = dataImgs.map((dataImg) => new MediaFactory(dataImg, data.name, 'image'))
     const videoFromData = dataVideos.map((dataVideo) => new MediaFactory(dataVideo, data.name, 'video'))
     
     const fullMedias = imagesFromData.concat(videoFromData)
-    console.log(fullMedias)
 
     return fullMedias
 }
@@ -63,9 +61,7 @@ async function displayMedias(data) {
 }
 
 // Fonction permettant de récupérer tous les likes de chaque photo
-async function createAllLikes(data){
-    
-    console.log(data)
+async function createAllLikes(data){    
     const photographerPicture = document.getElementById('user-pictures');
     const datalikesAndPrices = mediaFactory(data);
     const likesAndPrices = datalikesAndPrices.getLikesNumbers();
