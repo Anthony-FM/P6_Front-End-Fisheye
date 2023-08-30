@@ -1,7 +1,7 @@
 // Fonction permettant de basculer d'un coeur vide a un coeur plein
 // tout en ajoutant ou soustrayant la valeur total de like sur la photo
 function likesUpLikesDown(data, keyArray){  
-    const media = data.media;
+    
     const heart = document.querySelectorAll(".heart-container em");
     const heartNumber = document.querySelectorAll(".heart-number");
 
@@ -9,17 +9,17 @@ function likesUpLikesDown(data, keyArray){
         heart[keyArray].classList.replace("fa-regular", "fa-solid");
         heart[keyArray].classList.add("heart");
         heartNumber[keyArray].textContent = "";
-        heartNumber[keyArray].textContent = media[keyArray].likes + 1;
-        heartNumber[keyArray].setAttribute('title', `La photo a ${media[keyArray].likes + 1} likes .`);
-        heart[keyArray].setAttribute('title', `La photo a ${media[keyArray].likes + 1} likes . Cliquez pour ajouter ou retirer un like`);
+        heartNumber[keyArray].textContent = data[keyArray].likes + 1;
+        heartNumber[keyArray].setAttribute('title', `La photo a ${data[keyArray].likes + 1} likes .`);
+        heart[keyArray].setAttribute('title', `La photo a ${data[keyArray].likes + 1} likes . Cliquez pour ajouter ou retirer un like`);
         likes();
     } else {
         heart[keyArray].classList.replace("fa-solid", "fa-regular");
         heart[keyArray].classList.remove("heart");
         heartNumber[keyArray].textContent = "";
-        heartNumber[keyArray].textContent = media[keyArray].likes;
-        heartNumber[keyArray].setAttribute('aria-label', `La photo a ${media[keyArray].likes} likes .`);
-        heart[keyArray].setAttribute('aria-label', `La photo a ${media[keyArray].likes} likes . Cliquez pour ajouter ou retirer un like`);
+        heartNumber[keyArray].textContent = data[keyArray].likes;
+        heartNumber[keyArray].setAttribute('aria-label', `La photo a ${data[keyArray].likes} likes .`);
+        heart[keyArray].setAttribute('aria-label', `La photo a ${data[keyArray].likes} likes . Cliquez pour ajouter ou retirer un like`);
         likes();
     }
 }

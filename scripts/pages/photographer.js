@@ -38,21 +38,24 @@ async function createId(data) {
     
 }
 
-// Fonction récupérant les objets des medias du photographe
-async function displayMedias(data) {    
-    const photographerPicture = document.getElementById('user-pictures'); 
+async function getPictureAndVideoData(data){
     let dataImgs = data.media.filter((el) =>  el.image)
     let dataVideos = data.media.filter((el) =>  el.video)
+    console.log(data.price)
 
     const imagesFromData = dataImgs.map((dataImg) => new MediaFactory(dataImg, data.name, 'image'))
     const videoFromData = dataVideos.map((dataVideo) => new MediaFactory(dataVideo, data.name, 'video'))
     
     const fullMedias = imagesFromData.concat(videoFromData)
-    fullMedias.forEach((media) => {
-        // // Création d'un lien unique pour chaque média
-        // let urlName = `./assets/${data.name}/` + (media.image ? media.image : media.video);
-        // // Ajouter le lien dans l'objet media
-        // let medias = { ...media, urlName}
+    console.log(fullMedias)
+
+    return fullMedias
+}
+
+// Fonction récupérant les objets des medias du photographe
+async function displayMedias(data) {    
+    const photographerPicture = document.getElementById('user-pictures'); 
+    data.forEach((media) => {        
         const pictureDOM = mediaFactory(media); // utilisation de la Factory Media
         const pictureArticle = pictureDOM.getUserMediasDOM();
         photographerPicture.appendChild(pictureArticle);
@@ -61,6 +64,8 @@ async function displayMedias(data) {
 
 // Fonction permettant de récupérer tous les likes de chaque photo
 async function createAllLikes(data){
+    
+    console.log(data)
     const photographerPicture = document.getElementById('user-pictures');
     const datalikesAndPrices = mediaFactory(data);
     const likesAndPrices = datalikesAndPrices.getLikesNumbers();
@@ -72,11 +77,11 @@ async function createLightboxContent(data){
     
     const asideContainer = document.querySelector('.lightbox-pictures-aside');
     
-    data.media.forEach((media) => { // pour chaque média
-        // création d'un lien unique a intégré dans l'objet media
-        let urlName = `./assets/${data.name}/`+ (media.image ? media.image : media.video);
-        let medias = { ...media, urlName}
-        const imageData = mediaFactory(medias);
+    data.forEach((media) => { // pour chaque média
+        // // création d'un lien unique a intégré dans l'objet media
+        // let urlName = `./assets/${data.name}/`+ (media.image ? media.image : media.video);
+        // let medias = { ...media, urlName}
+        const imageData = mediaFactory(media);
 
         // récupération de l'objet via la fonction de la factory getLightboxMedias()
         const articleImage = imageData.getLightboxMedias(); 
@@ -91,11 +96,12 @@ async function init() {
     // Récupère les datas du photographe
     const thePhotographer = await getPhotographer(id);
     await createId(thePhotographer);    
-    await displayMedias(thePhotographer);
-    await createAllLikes(thePhotographer);    
-    await createLightboxContent(thePhotographer);
+    const data = await getPictureAndVideoData(thePhotographer);
+    await displayMedias(data);
+    await createAllLikes(thePhotographer);
+    await createLightboxContent(data);
     opencLightboxWithButton();
-    await upOrDownLike(thePhotographer);
+    await upOrDownLike(data);
     
 };
 
